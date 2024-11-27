@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.exception.CommentNotFoundException;
 import com.example.demo.model.Comment;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.services.CommentService;
@@ -50,7 +51,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteComment(long id) {
+    public void deleteCommentById(long id) {
         commentRepository.deleteById(id);
     }
 }

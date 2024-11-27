@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.exception.PostNotFoundException;
 import com.example.demo.model.Post;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,6 @@ public interface PostService {
     Post createPost(Post post);
     Post findPostById(Long id);
     Post updatePost(Post post);
-    void deletePostById(Long id);
+    void deletePostById(Long id) throws PostNotFoundException;
 
 }

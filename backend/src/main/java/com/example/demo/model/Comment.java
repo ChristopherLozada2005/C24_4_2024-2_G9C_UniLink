@@ -47,6 +47,7 @@ public class Comment {
 
     public static CommentDTO toDto(Comment comment) {
         CommentDTO dto = new CommentDTO();
+        dto.setId(comment.getId());
         dto.setText(comment.getText());
 
         UserDTO user = new UserDTO();

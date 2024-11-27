@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.exception.CommentNotFoundException;
 import com.example.demo.model.Comment;
 
 import java.util.List;
@@ -13,6 +14,6 @@ public interface CommentService {
     Comment createComment(Comment comment);
     Comment createResponse(Comment comment);
     Comment updateComment(Comment comment);
-    void deleteComment(long id);
+    void deleteCommentById(long id) throws CommentNotFoundException;
 
 }

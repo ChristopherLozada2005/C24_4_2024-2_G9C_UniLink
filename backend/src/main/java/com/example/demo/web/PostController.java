@@ -1,6 +1,7 @@
 package com.example.demo.web;
 
 import com.example.demo.dto.PostDTO;
+import com.example.demo.exception.PostNotFoundException;
 import com.example.demo.model.Post;
 import com.example.demo.model.User;
 import com.example.demo.services.PostService;
@@ -68,7 +69,11 @@ public class PostController {
 
     @DeleteMapping("/posts/{pub_id}")
     public void deletePostById(@PathVariable long pub_id) {
-        postService.deletePostById(pub_id);
+        try {
+            postService.deletePostById(pub_id);
+        } catch (PostNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

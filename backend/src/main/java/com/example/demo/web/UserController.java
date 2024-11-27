@@ -5,6 +5,7 @@ import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,12 +22,12 @@ public class UserController {
     }
 
     @GetMapping("/users/{user_id}")
-    public User findUserProfile(@PathVariable long user_id) {
+    public User findUserById(@PathVariable long user_id) {
         return userService.findUserById(user_id);
     }
 
     @GetMapping("/users/username/{user_name}")
-    public User findUserProfile(@PathVariable String user_name) {
+    public User findUserByUsername(@PathVariable String user_name) {
         return userService.findUserByUsername(user_name);
     }
 

@@ -1,9 +1,9 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.UserService;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -41,8 +41,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User validateCredentials(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password);
+    public void validateCredentials(String username, String password) throws UserNotFoundException {
+        User user = userRepository.findByUsernameAndPassword(username, password);
+        if (user != null) {
+            return;
+        }
+        throw new UserNotFoundException("Invalid Credentials");
     }
 
     @Override

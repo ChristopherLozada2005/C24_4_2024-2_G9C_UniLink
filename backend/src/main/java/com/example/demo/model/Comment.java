@@ -3,7 +3,6 @@ package com.example.demo.model;
 import com.example.demo.dto.CommentDTO;
 import com.example.demo.dto.UserDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,7 +38,7 @@ public class Comment {
     @JoinColumn(name = "publicacion_id")
     @ManyToOne
     @JsonBackReference
-    Publication publication;
+    Post post;
 
     @JoinColumn(name = "comentario_id")
     @ManyToOne

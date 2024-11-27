@@ -14,8 +14,8 @@ public interface UserService {
     User findUserByUsername(String username);
     User createUser(User user);
     User updateUser(User user);
-    void deleteUser(long id);
+    void deleteUserById(long id);
 
-    String verify(User user, HttpServletResponse response);
+    String verifyUser(User user, HttpServletResponse response);
 
 }

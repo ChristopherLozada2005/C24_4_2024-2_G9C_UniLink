@@ -63,12 +63,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(long id) {
+    public void deleteUserById(long id) {
         userRepository.deleteById(id);
     }
 
 
-    public String verify(User user, HttpServletResponse response) {
+    public String verifyUser(User user, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 user.getUsername(),
                 user.getPassword()

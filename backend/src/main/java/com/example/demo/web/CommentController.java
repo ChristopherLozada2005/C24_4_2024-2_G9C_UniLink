@@ -2,10 +2,10 @@ package com.example.demo.web;
 
 import com.example.demo.dto.CommentDTO;
 import com.example.demo.model.Comment;
-import com.example.demo.model.Publication;
+import com.example.demo.model.Post;
 import com.example.demo.model.User;
 import com.example.demo.services.CommentService;
-import com.example.demo.services.PublicationService;
+import com.example.demo.services.PostService;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class CommentController {
     UserService userService;
 
     @Autowired
-    PublicationService publicationService;
+    PostService postService;
 
     @GetMapping("/comments")
     public List<Comment> findAllComments() {
@@ -31,8 +31,8 @@ public class CommentController {
     }
 
     @GetMapping("/comments/post/{post_id}")
-    public List<CommentDTO> getPostComments(@PathVariable long post_id) {
-        List<Comment> comments = commentService.findPostComments(post_id);
+    public List<CommentDTO> findCommentsByPostId(@PathVariable long post_id) {
+        List<Comment> comments = commentService.findCommentsByPostId(post_id);
         return comments.stream()
                 .map(Comment::toDto)
                 .collect(Collectors.toList());
@@ -40,13 +40,13 @@ public class CommentController {
 
     @PostMapping("/comments")
     public Comment createComment(@RequestBody CommentDTO commentDTO) {
-        Publication publication = publicationService.findPublicationById(commentDTO.getPublicationId());
+        Post post = postService.findPostById(commentDTO.getPublicationId());
         User user = userService.findUserById(commentDTO.getUserId());
         Comment comment = new Comment();
         comment.setText(commentDTO.getText());
-        comment.setPublication(publication);
+        comment.setPost(post);
         comment.setUser(user);
-        return commentService.postComment(comment);
+        return commentService.createComment(comment);
     }
 
     @PostMapping("/comments/responses")
@@ -71,8 +71,8 @@ public class CommentController {
     }
 
     @GetMapping("/comments/responses/{comm_id}")
-    public List<Comment> getResponses(@PathVariable long comm_id) {
-        return commentService.findResponses(comm_id);
+    public List<Comment> getResponsesByCommentId(@PathVariable long comm_id) {
+        return commentService.findResponsesByCommentId(comm_id);
     }
 
 }

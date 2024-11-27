@@ -7,10 +7,10 @@ import java.util.List;
 public interface CommentService {
 
     List<Comment> findAllComments();
-    List<Comment> findPostComments(long id);
-    List<Comment> findResponses(long id);
-    Comment findCommendById(long id);
-    Comment postComment(Comment comment);
+    List<Comment> findCommentsByPostId(long post_id);
+    List<Comment> findResponsesByCommentId(long comment_id);
+    Comment findCommendById(long comment_id);
+    Comment createComment(Comment comment);
     Comment createResponse(Comment comment);
     Comment updateComment(Comment comment);
     void deleteComment(long id);

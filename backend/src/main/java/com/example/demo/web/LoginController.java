@@ -19,7 +19,7 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@RequestBody UserDTO userDTO, HttpServletResponse response) {
         User user = new User(userDTO.getUsername(), userDTO.getPassword());
-        return userService.verify(user, response);
+        return userService.verifyUser(user, response);
     }
 
     @PostMapping("/register")

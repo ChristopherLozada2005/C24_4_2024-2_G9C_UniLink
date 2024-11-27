@@ -1,6 +1,5 @@
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Magia', 'cat', 'magia@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 5, 'just a magia cat who likes to sleep and eat');
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Mayo', 'cat', 'mayo@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 4, 'just a mayo cat who likes to eat and slep');
-
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Juan', 'Perez', 'juanperez@gmail.com', 'password123', 28, 'Amante de la tecnología');
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Ana', 'Garcia', 'anagarcia@gmail.com', 'mypassword456', 34, 'Desarrolladora de software');
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Carlos', 'López', 'carloslopez@gmail.com', 'carlos789', 25, 'Programador web');
@@ -11,10 +10,6 @@ INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VA
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Sara', 'Gómez', 'saragomez@gmail.com', 'sara987', 26, 'Gestora de proyectos');
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Jorge', 'González', 'jorgegonzalez@gmail.com', 'jorgepassword01', 32, 'Consultor IT');
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Raquel', 'Sánchez', 'raquelsanchez@gmail.com', 'raquel2023', 27, 'Desarrolladora móvil');
-
-INSERT INTO publicaciones(titulo, usuario_id, fecha_publicacion) VALUES('pub01', 1, CURRENT_TIMESTAMP);
-INSERT INTO publicaciones(titulo, usuario_id, fecha_publicacion) VALUES('pub02', 1, CURRENT_TIMESTAMP);
-INSERT INTO publicaciones(titulo, usuario_id, fecha_publicacion) VALUES('pub03', 2, CURRENT_TIMESTAMP);
 
 INSERT INTO publicaciones(titulo, descripcion, categoria, fecha_publicacion, usuario_id) VALUES('Lanzamiento de nuevo producto', 'Anunciamos un nuevo producto al mercado.', 'Tecnología', CURRENT_TIMESTAMP, 1);
 INSERT INTO publicaciones(titulo, descripcion, categoria, fecha_publicacion, usuario_id) VALUES('Actualización de software', 'Nuestra última actualización trae nuevas características.', 'Software', CURRENT_TIMESTAMP, 2);

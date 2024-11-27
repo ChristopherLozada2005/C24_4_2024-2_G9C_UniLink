@@ -20,12 +20,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> findPostComments(long id) {
-        return commentRepository.findByPublicationId(id);
+    public List<Comment> findCommentsByPostId(long post_id) {
+        return commentRepository.findByPostId(post_id);
     }
 
     @Override
-    public List<Comment> findResponses(long id) {
+    public List<Comment> findResponsesByCommentId(long id) {
         return commentRepository.findByCommentId(id);
     }
 
@@ -35,7 +35,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment postComment(Comment comment) {
+    public Comment createComment(Comment comment) {
         return commentRepository.save(comment);
     }
 

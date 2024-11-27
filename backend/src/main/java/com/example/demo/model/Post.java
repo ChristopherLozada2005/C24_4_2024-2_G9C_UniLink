@@ -4,6 +4,7 @@ import com.example.demo.dto.PostDTO;
 import com.example.demo.dto.UserDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Post {
     private Long id;
 
     @Column(name = "titulo")
+    @JsonProperty("title")
     private String title;
 
     @Column(name = "descripcion")

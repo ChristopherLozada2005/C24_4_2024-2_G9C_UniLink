@@ -1,5 +1,5 @@
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Magia', 'cat', 'magia@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 5, 'just a magia cat who likes to sleep and eat');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Mayo', 'cat', 'mayo@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 4, 'just a mayo cat who likes to eat and slep');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Magia', 'Cat', 'magia@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 5, 'Just a magia cat who likes to sleep and eat');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Mayo', 'Cat', 'mayo@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 4, 'Just a mayo cat who likes to eat and slep');
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Juan', 'Perez', 'juanperez@gmail.com', 'password123', 28, 'Amante de la tecnología');
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Ana', 'Garcia', 'anagarcia@gmail.com', 'mypassword456', 34, 'Desarrolladora de software');
 INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Carlos', 'López', 'carloslopez@gmail.com', 'carlos789', 25, 'Programador web');

@@ -81,13 +81,12 @@ class PostServiceImplTest {
         User USER = new User();
         USER.setId(2L);
 
-        String TITLE_UPDATED = "New Post";
-        String DESCRIPTION_UPDATED = "Some description...";
+        String TITLE_UPDATED = "Updated New Post";
+        String DESCRIPTION_UPDATED = "Updated description...";
         User USER_UPDATED = new User();
         USER_UPDATED.setId(3L);
 
         Post newPost = new Post(TITLE,  DESCRIPTION, null, null, USER);
-        log.info("", newPost);
         postService.createPost(newPost);
 
         newPost.setTitle(TITLE_UPDATED);
@@ -95,7 +94,6 @@ class PostServiceImplTest {
         newPost.setUser(USER_UPDATED);
 
         Post updatedPost = postService.updatePost(newPost);
-        log.info("", updatedPost);
 
         assertEquals(TITLE_UPDATED, updatedPost.getTitle());
         assertEquals(DESCRIPTION_UPDATED, updatedPost.getDescription());

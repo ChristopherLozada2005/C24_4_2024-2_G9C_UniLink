@@ -1,6 +1,5 @@
 package com.example.demo.services.impl;
 
-import com.example.demo.exception.CommentNotFoundException;
 import com.example.demo.model.Comment;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.services.CommentService;
@@ -12,8 +11,12 @@ import java.util.List;
 @Service
 public class CommentServiceImpl implements CommentService {
 
+    private final CommentRepository commentRepository;
+
     @Autowired
-    CommentRepository commentRepository;
+    public CommentServiceImpl(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
+    }
 
     @Override
     public List<Comment> findAllComments() {
@@ -21,13 +24,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> findCommentsByPostId(long post_id) {
-        return commentRepository.findByPostId(post_id);
+    public List<Comment> findCommentsByPostId(long postId) {
+        return commentRepository.findByPostId(postId);
     }
 
     @Override
-    public List<Comment> findResponsesByCommentId(long id) {
-        return commentRepository.findByCommentId(id);
+    public List<Comment> findResponsesByReplyToId(long id) {
+        return commentRepository.findByReplyToId(id);
     }
 
     @Override

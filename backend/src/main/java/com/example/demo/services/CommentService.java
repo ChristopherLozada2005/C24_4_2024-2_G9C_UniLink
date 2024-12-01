@@ -8,9 +8,9 @@ import java.util.List;
 public interface CommentService {
 
     List<Comment> findAllComments();
-    List<Comment> findCommentsByPostId(long post_id);
-    List<Comment> findResponsesByCommentId(long comment_id);
-    Comment findCommendById(long comment_id);
+    List<Comment> findCommentsByPostId(long postId);
+    List<Comment> findResponsesByReplyToId(long commentId);
+    Comment findCommendById(long commentId);
     Comment createComment(Comment comment);
     Comment createResponse(Comment comment);
     Comment updateComment(Comment comment);

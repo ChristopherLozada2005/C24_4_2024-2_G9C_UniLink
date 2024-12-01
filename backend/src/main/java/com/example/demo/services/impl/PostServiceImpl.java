@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
 
+    private final PostRepository postRepository;
+
     @Autowired
-    PostRepository postRepository;
+    public PostServiceImpl(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
 
     @Override
     public List<Post> findAllPosts() {
@@ -20,8 +24,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findUserPosts(Long user_id) {
-        return postRepository.findByUserIdOrderByPubDateDesc(user_id);
+    public List<Post> findUserPosts(Long userId) {
+        return postRepository.findByUserIdOrderByPubDateDesc(userId);
+    }
+
+    @Override
+    public List<Post> findPostsByCategory(String category) {
+        return postRepository.findByCategory(category);
     }
 
     @Override
@@ -41,10 +50,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePostById(Long id) {
-        try {
-            postRepository.deleteById(id);
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
+        postRepository.deleteById(id);
     }
 }

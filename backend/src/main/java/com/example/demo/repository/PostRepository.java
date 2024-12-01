@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
-    List<Post> findByUserIdOrderByPubDateDesc(long user_id);
+
+    List<Post> findByUserIdOrderByPubDateDesc(long userId);
     List<Post> findAllByOrderByPubDateDesc();
+    List<Post> findByCategory(String category);
+
 }

@@ -6,44 +6,54 @@ import com.example.demo.model.Post;
 import com.example.demo.model.User;
 import com.example.demo.services.PostService;
 import com.example.demo.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 public class PostController {
 
-    @Autowired
-    private PostService postService;
+    private final PostService postService;
+    private final UserService userService;
 
-    @Autowired
-    private UserService userService;
+    public PostController(PostService postService, UserService userService) {
+        this.postService = postService;
+        this.userService = userService;
+    }
 
     @GetMapping("/posts")
     public List<PostDTO> findAllPosts() {
         List<Post> posts = postService.findAllPosts();
         return posts.stream()
                 .map(Post::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
-    @GetMapping("/posts/user/{user_id}")
-    public List<PostDTO> findPostsByUserId(@PathVariable long user_id) {
-        List<Post> posts = postService.findUserPosts(user_id);
+    @GetMapping("/posts/user/{userId}")
+    public List<PostDTO> findPostsByUserId(@PathVariable long userId) {
+        List<Post> posts = postService.findUserPosts(userId);
         return posts.stream()
                 .map(Post::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
-    @GetMapping("/posts/username/{user_name}")
-    public List<PostDTO> findPostsByUsername(@PathVariable String user_name) {
-        User user = userService.findUserByUsername(user_name);
+    @GetMapping("/posts/{postCategory}")
+    public List<PostDTO> findPostsByCategory(@PathVariable String postCategory) {
+        List<Post> posts = postService.findPostsByCategory(postCategory);
+        return posts.stream()
+                .map(Post::toDto)
+                .toList();
+    }
+
+    @GetMapping("/posts/username/{userName}")
+    public List<PostDTO> findPostsByUsername(@PathVariable String userName) {
+        User user = userService.findUserByUsername(userName);
         List<Post> posts = postService.findUserPosts(user.getId());
         return posts.stream()
                 .map(Post::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @PostMapping("/posts")
@@ -53,26 +63,27 @@ public class PostController {
         return postService.createPost(post);
     }
 
-    @GetMapping("/posts/{pub_id}")
-    public Post findPostById(@PathVariable long pub_id) {
-        return postService.findPostById(pub_id);
+    @GetMapping("/posts/{pubId}")
+    public Post findPostById(@PathVariable long pubId) {
+
+        return postService.findPostById(pubId);
     }
 
-    @PutMapping("/posts/{pub_id}")
-    public Post updatePost(@PathVariable long pub_id, @RequestBody PostDTO postDTO) {
-        Post post = postService.findPostById(pub_id);
+    @PutMapping("/posts/{pubId}")
+    public Post updatePost(@PathVariable long pubId, @RequestBody PostDTO postDTO) {
+        Post post = postService.findPostById(pubId);
         post.setTitle(postDTO.getTitle());
         post.setCategory(postDTO.getCategory());
         post.setDescription(postDTO.getDescription());
         return postService.updatePost(post);
     }
 
-    @DeleteMapping("/posts/{pub_id}")
-    public void deletePostById(@PathVariable long pub_id) {
+    @DeleteMapping("/posts/{pubId}")
+    public void deletePostById(@PathVariable long pubId) {
         try {
-            postService.deletePostById(pub_id);
+            postService.deletePostById(pubId);
         } catch (PostNotFoundException e) {
-            throw new RuntimeException(e);
+            log.info(e.getMessage());
         }
     }
 

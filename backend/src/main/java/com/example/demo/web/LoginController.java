@@ -13,8 +13,12 @@ public class LoginController {
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
+    private final UserService userService;
+
     @Autowired
-    public UserService userService;
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/login")
     public String login(@RequestBody UserDTO userDTO, HttpServletResponse response) {

@@ -11,7 +11,7 @@ public class CustomUserDetails implements UserDetails {
 
     private final String password;
     private final String username;
-    private List<GrantedAuthority> authorities;
+
     @Getter
     private final Long userId;
 

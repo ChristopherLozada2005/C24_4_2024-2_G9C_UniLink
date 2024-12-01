@@ -1,8 +1,6 @@
 package com.example.demo.web;
 
 import com.example.demo.dto.PostDTO;
-import com.example.demo.model.Post;
-import com.example.demo.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
@@ -19,8 +17,6 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -45,12 +41,13 @@ class PostControllerTest {
 
     @Test
     void findPostsByUserId() throws Exception {
-        String EXPECTED_TITLE = "Conferencia sobre IA";
+        final int SIZE_EXPECTED = 1;
         final int POST_ID = 3;
 
-        this.mockMvc.perform(get("/posts/" + POST_ID))
+        this.mockMvc.perform(get("/posts/user/" + POST_ID))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(jsonPath("$.title", is(EXPECTED_TITLE)));
+                .andDo(print())
+                .andExpect(jsonPath("$", hasSize(SIZE_EXPECTED)));
     }
 
     @Test
@@ -65,9 +62,9 @@ class PostControllerTest {
 
     @Test
     void createPost() throws Exception {
-        String TITLE = "title";
-        String DESCRIPTION = "description";
-        Long USER_ID = 3L;
+        final String TITLE = "title";
+        final String DESCRIPTION = "description";
+        final Long USER_ID = 3L;
 
         PostDTO newPost = new PostDTO();
         newPost.setTitle(TITLE);
@@ -81,15 +78,28 @@ class PostControllerTest {
                 .andExpect(jsonPath("$.title", is(TITLE)));
     }
 
-    @Test
+    void findPostsByCategory() {
+        /*
+             w
+        */
+    }
+
     void findPostById() {
+        /*
+             w
+        */
     }
 
-    @Test
     void updatePost() {
+        /*
+             w
+        */
     }
 
-    @Test
     void deletePostById() {
+        /*
+             w
+        */
     }
+
 }

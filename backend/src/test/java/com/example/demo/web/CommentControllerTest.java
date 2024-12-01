@@ -54,9 +54,9 @@ class CommentControllerTest {
 
     @Test
     void createComment() throws Exception {
-        String TEXT = "new comment!";
-        Long USER_ID = 3L;
-        Long POST_ID = 3L;
+        final String TEXT = "new comment!";
+        final Long USER_ID = 3L;
+        final Long POST_ID = 3L;
 
         CommentDTO newComment= new CommentDTO();
         newComment.setText(TEXT);
@@ -71,14 +71,14 @@ class CommentControllerTest {
 
     @Test
     void createResponse() throws Exception {
-        String TEXT = "new comment!";
-        Long USER_ID = 3L;
-        Long COMM_ID = 3L;
+        final String TEXT = "new comment!";
+        final Long USER_ID = 3L;
+        final Long COMM_ID = 3L;
 
         CommentDTO newResponse= new CommentDTO();
         newResponse.setText(TEXT);
         newResponse.setUserId(USER_ID);
-        newResponse.setCommendId(COMM_ID);
+        newResponse.setReplyToId(COMM_ID);
 
         mockMvc.perform(post("/comments/responses")
                 .content(objectMapper.writeValueAsString(newResponse))
@@ -88,13 +88,13 @@ class CommentControllerTest {
 
     @Test
     void updateComment() throws Exception {
-        String TEXT = "new comment!";
-        Long USER_ID = 3L;
-        Long POST_ID = 3L;
+        final String TEXT = "new comment!";
+        final Long USER_ID = 3L;
+        final Long POST_ID = 3L;
 
-        String TEXT_UPDATED = "Updated new comment!";
-        Long USER_ID_UPDATED = 3L;
-        Long POST_ID_UPDATED = 3L;
+        final String TEXT_UPDATED = "Updated new comment!";
+        final Long USER_ID_UPDATED = 3L;
+        final Long POST_ID_UPDATED = 3L;
 
         CommentDTO newComment = new CommentDTO();
         newComment.setText(TEXT);
@@ -128,14 +128,14 @@ class CommentControllerTest {
 
     @Test
     void deleteCommentById() throws Exception {
-        String TEXT = "new comment!";
-        Long USER_ID = 3L;
-        Long COMM_ID = 3L;
+        final String TEXT = "new comment!";
+        final Long USER_ID = 3L;
+        final Long COMM_ID = 3L;
 
         CommentDTO newResponse= new CommentDTO();
         newResponse.setText(TEXT);
         newResponse.setUserId(USER_ID);
-        newResponse.setCommendId(COMM_ID);
+        newResponse.setReplyToId(COMM_ID);
 
         ResultActions mvcActions = mockMvc.perform(post("/comments/responses")
                         .content(objectMapper.writeValueAsString(newResponse))

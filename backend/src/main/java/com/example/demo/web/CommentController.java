@@ -8,40 +8,43 @@ import com.example.demo.model.User;
 import com.example.demo.services.CommentService;
 import com.example.demo.services.PostService;
 import com.example.demo.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
+@Slf4j
 public class CommentController {
 
-    @Autowired
-    CommentService commentService;
+    private final CommentService commentService;
+    private final UserService userService;
+    private final PostService postService;
 
     @Autowired
-    UserService userService;
-
-    @Autowired
-    PostService postService;
+    public CommentController(CommentService commentService, UserService userService, PostService postService) {
+        this.commentService = commentService;
+        this.userService = userService;
+        this.postService = postService;
+    }
 
     @GetMapping("/comments")
     public List<Comment> findAllComments() {
         return  commentService.findAllComments();
     }
 
-    @GetMapping("/comments/post/{post_id}")
-    public List<CommentDTO> findCommentsByPostId(@PathVariable long post_id) {
-        List<Comment> comments = commentService.findCommentsByPostId(post_id);
+    @GetMapping("/comments/post/{postId}")
+    public List<CommentDTO> findCommentsByPostId(@PathVariable long postId) {
+        List<Comment> comments = commentService.findCommentsByPostId(postId);
         return comments.stream()
                 .map(Comment::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
-    @GetMapping("/comments/{comm_id}")
-    public CommentDTO findCommentById(@PathVariable long comm_id) {
-        Comment comment = commentService.findCommendById(comm_id);
+    @GetMapping("/comments/{commId}")
+    public CommentDTO findCommentById(@PathVariable long commId) {
+        Comment comment = commentService.findCommendById(commId);
         return Comment.toDto(comment);
     }
 
@@ -58,10 +61,10 @@ public class CommentController {
 
     @PostMapping("/comments/responses")
     public Comment createResponse(@RequestBody CommentDTO commentDTO) {
-        Comment comment = commentService.findCommendById(commentDTO.getCommendId());
+        Comment comment = commentService.findCommendById(commentDTO.getReplyToId());
         Comment response = new Comment();
         response.setText(commentDTO.getText());
-        response.setComment(comment);
+        response.setReplyTo(comment);
         return commentService.createResponse(response);
     }
 
@@ -72,18 +75,18 @@ public class CommentController {
         return commentService.updateComment(comment);
     }
 
-    @DeleteMapping("/comments/{comm_id}")
-    public void deleteCommentById(@PathVariable long comm_id) {
+    @DeleteMapping("/comments/{commId}")
+    public void deleteCommentById(@PathVariable long commId) {
         try {
-            commentService.deleteCommentById(comm_id);
+            commentService.deleteCommentById(commId);
         } catch (CommentNotFoundException e) {
-            throw new RuntimeException(e);
+            log.info(e.getMessage());
         }
     }
 
-    @GetMapping("/comments/responses/{comm_id}")
-    public List<Comment> getResponsesByCommentId(@PathVariable long comm_id) {
-        return commentService.findResponsesByCommentId(comm_id);
+    @GetMapping("/comments/responses/{commId}")
+    public List<Comment> findResponsesByReplyToId(@PathVariable long commId) {
+        return commentService.findResponsesByReplyToId(commId);
     }
 
 }

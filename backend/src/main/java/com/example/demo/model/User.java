@@ -1,8 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.dto.UserDTO;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Data
@@ -51,16 +47,6 @@ public class User {
     @CreationTimestamp
     // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regDate;
-
-    /*
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference("user-publications")
-    private List<Publication> publications;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference("user-comments")
-    private List<Comment> comments;
-     */
 
     public User(String username, String password) {
         this.username = username;

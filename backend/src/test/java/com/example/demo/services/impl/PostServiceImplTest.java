@@ -47,9 +47,9 @@ class PostServiceImplTest {
 
     @Test
     void createPost() {
-        String TITLE = "New Post";
-        String DESCRIPTION = "Some description...";
-        String CATEGORY = "Some category";
+        final String TITLE = "New Post";
+        final String DESCRIPTION = "Some description...";
+        final String CATEGORY = "Some category";
         User user = new User();
         user.setId(1L);
 
@@ -76,31 +76,33 @@ class PostServiceImplTest {
 
     @Test
     void updatePost() {
-        String TITLE = "New Post";
-        String DESCRIPTION = "Some description...";
-        User USER = new User();
-        USER.setId(2L);
+        final String TITLE = "New Post";
+        final String DESCRIPTION = "Some description...";
+        final User user = new User();
+        user.setId(2L);
 
-        String TITLE_UPDATED = "Updated New Post";
-        String DESCRIPTION_UPDATED = "Updated description...";
-        User USER_UPDATED = new User();
-        USER_UPDATED.setId(3L);
+        final String TITLE_UPDATED = "Updated New Post";
+        final String DESCRIPTION_UPDATED = "Updated description...";
+        final User userUpdated = new User();
+        userUpdated.setId(3L);
 
-        Post newPost = new Post(TITLE,  DESCRIPTION, null, null, USER);
+        Post newPost = new Post(TITLE,  DESCRIPTION, null, null, user);
         postService.createPost(newPost);
 
         newPost.setTitle(TITLE_UPDATED);
         newPost.setDescription(DESCRIPTION_UPDATED);
-        newPost.setUser(USER_UPDATED);
+        newPost.setUser(userUpdated);
 
         Post updatedPost = postService.updatePost(newPost);
 
         assertEquals(TITLE_UPDATED, updatedPost.getTitle());
         assertEquals(DESCRIPTION_UPDATED, updatedPost.getDescription());
-        assertEquals(USER_UPDATED.getId(), updatedPost.getUser().getId());
+        assertEquals(userUpdated.getId(), updatedPost.getUser().getId());
     }
 
-    @Test
     void deletePostById() {
+        /*
+            w
+         */
     }
 }

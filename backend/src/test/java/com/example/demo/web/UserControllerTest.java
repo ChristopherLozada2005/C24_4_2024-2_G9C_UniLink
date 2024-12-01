@@ -12,10 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -28,7 +25,7 @@ class UserControllerTest {
 
     @Test
     void findAllUsers() throws Exception {
-        int SIZE_EXPECTED = 12;
+        final int SIZE_EXPECTED = 12;
 
         this.mockMvc.perform(get("/users"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -37,7 +34,7 @@ class UserControllerTest {
 
     @Test
     void findUserById() throws Exception {
-        String EXPECTED_USERNAME = "mayo@gmail.com";
+        final String EXPECTED_USERNAME = "mayo@gmail.com";
         final int USER_ID = 2;
 
         this.mockMvc.perform(get("/users/" + USER_ID))
@@ -47,7 +44,7 @@ class UserControllerTest {
 
     @Test
     void findUserByUsername() throws Exception {
-        String EXPECTED_NAME = "Juan";
+        final String EXPECTED_NAME = "Juan";
         final String USERNAME = "juanperez@gmail.com";
 
         this.mockMvc.perform(get("/users/username/" + USERNAME))

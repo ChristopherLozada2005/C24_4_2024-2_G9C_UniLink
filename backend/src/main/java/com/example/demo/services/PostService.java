@@ -11,6 +11,7 @@ public interface PostService {
 
     List<Post> findAllPosts();
     List<Post> findUserPosts(Long id);
+    List<Post> findPostsByCategory(String category);
     Post createPost(Post post);
     Post findPostById(Long id);
     Post updatePost(Post post);

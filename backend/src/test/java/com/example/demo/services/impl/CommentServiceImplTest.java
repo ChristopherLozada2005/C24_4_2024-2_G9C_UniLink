@@ -36,21 +36,21 @@ class CommentServiceImplTest {
     @Test
     void findCommentsByPostId() {
         final int SIZE_EXPECTED = 3;
-        long POST_ID = 1;
+        final long POST_ID = 1;
 
         List<Comment> comments = commentService.findCommentsByPostId(POST_ID);
-        int SIZE_ACTUAL = comments.size();
+        final int SIZE_ACTUAL = comments.size();
 
         assertEquals(SIZE_EXPECTED, SIZE_ACTUAL);
     }
 
     @Test
-    void findResponsesByCommentId() {
+    void findResponsesByReplyToId() {
         final int SIZE_EXPECTED = 0;
-        long COMM_ID = 1;
+        final long COMM_ID = 1;
 
-        List<Comment> comments = commentService.findResponsesByCommentId(COMM_ID);
-        int SIZE_ACTUAL = comments.size();
+        List<Comment> comments = commentService.findResponsesByReplyToId(COMM_ID);
+        final int SIZE_ACTUAL = comments.size();
 
         assertEquals(SIZE_EXPECTED, SIZE_ACTUAL);
     }
@@ -62,16 +62,16 @@ class CommentServiceImplTest {
 
         Comment comment = commentService.findCommendById(COMM_ID);
 
-        String TEXT_ACTUAL = comment.getText();
+        final String TEXT_ACTUAL = comment.getText();
 
         assertEquals(TEXT_EXPECTED, TEXT_ACTUAL);
     }
 
     @Test
     void createComment() {
-        String TEXT = "new comment!";
-        Long USER_ID = 3L;
-        Long POST_ID = 3L;
+        final String TEXT = "new comment!";
+        final Long USER_ID = 3L;
+        final Long POST_ID = 3L;
 
         User user = new User();
         user.setId(USER_ID);
@@ -89,9 +89,9 @@ class CommentServiceImplTest {
 
     @Test
     void createResponse() {
-        String TEXT = "new comment!";
-        Long USER_ID = 3L;
-        Long COMM_ID = 2L;
+        final String TEXT = "new comment!";
+        final Long USER_ID = 3L;
+        final Long COMM_ID = 2L;
 
         User user = new User();
         user.setId(USER_ID);
@@ -104,23 +104,23 @@ class CommentServiceImplTest {
         Comment newResponse = commentService.findCommendById(response.getId());
         assertEquals(TEXT, newResponse.getText());
         assertEquals(USER_ID, newResponse.getUser().getId());
-        assertEquals(COMM_ID, newResponse.getComment().getId());
+        assertEquals(COMM_ID, newResponse.getReplyTo().getId());
     }
 
     @Test
     void updateComment() {
-        String TEXT = "new comment!";
-        Long USER_ID = 3L;
-        Long POST_ID = 3L;
+        final String TEXT = "new comment!";
+        final Long USER_ID = 3L;
+        final Long POST_ID = 3L;
 
         User user = new User();
         user.setId(USER_ID);
         Post post = new Post();
         post.setId(POST_ID);
 
-        String TEXT_UPDATED = "new comment!";
-        Long USER_ID_UPDATED = 3L;
-        Long POST_ID_UPDATED = 3L;
+        final String TEXT_UPDATED = "new comment!";
+        final Long USER_ID_UPDATED = 3L;
+        final Long POST_ID_UPDATED = 3L;
 
         User userUpdated = new User();
         userUpdated.setId(USER_ID_UPDATED);
@@ -142,9 +142,9 @@ class CommentServiceImplTest {
 
     @Test
     void deleteCommentById() {
-        String TEXT = "new comment!";
-        Long USER_ID = 3L;
-        Long POST_ID = 3L;
+        final String TEXT = "new comment!";
+        final Long USER_ID = 3L;
+        final Long POST_ID = 3L;
 
         User user = new User();
         user.setId(USER_ID);

@@ -40,9 +40,9 @@ public class Comment {
     @JsonBackReference
     Post post;
 
-    @JoinColumn(name = "comentario_id")
+    @JoinColumn(name = "comentario_id_parent")
     @ManyToOne
-    Comment comment;
+    Comment replyTo;
 
 
     public static CommentDTO toDto(Comment comment) {

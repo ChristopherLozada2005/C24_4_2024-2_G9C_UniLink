@@ -1,15 +1,15 @@
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Magia', 'Cat', 'magia@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 5, 'Just a magia cat who likes to sleep and eat');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Mayo', 'Cat', 'mayo@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 4, 'Just a mayo cat who likes to eat and slep');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Juan', 'Perez', 'juanperez@gmail.com', 'password123', 28, 'Amante de la tecnología');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Ana', 'Garcia', 'anagarcia@gmail.com', 'mypassword456', 34, 'Desarrolladora de software');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Carlos', 'López', 'carloslopez@gmail.com', 'carlos789', 25, 'Programador web');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Maria', 'Torres', 'mariatorres@gmail.com', 'marialovescode', 30, 'Entusiasta de la IA');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Luis', 'Fernández', 'luisfernandez@gmail.com', 'luis1234', 22, 'Creador de contenido');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Elena', 'Rodríguez', 'elenarodriguez@gmail.com', 'elenapass567', 29, 'Diseñadora gráfica');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Pedro', 'Martínez', 'pedromartinez@gmail.com', 'pedropassword', 35, 'Ingeniero de software');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Sara', 'Gómez', 'saragomez@gmail.com', 'sara987', 26, 'Gestora de proyectos');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Jorge', 'González', 'jorgegonzalez@gmail.com', 'jorgepassword01', 32, 'Consultor IT');
-INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Raquel', 'Sánchez', 'raquelsanchez@gmail.com', 'raquel2023', 27, 'Desarrolladora móvil');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Magia', 'Cat', 'magia@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 5, 'Just a magia cat who likes to eat and sleep');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Mayo', 'Cat', 'mayo@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 4, 'Just a mayo cat who likes to eat and sleep');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Juan', 'Perez', 'juanperez@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 28, 'Amante de la tecnología');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Ana', 'Garcia', 'anagarcia@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 34, 'Desarrolladora de software');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Carlos', 'López', 'carloslopez@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 25, 'Programador web');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Maria', 'Torres', 'mariatorres@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 30, 'Entusiasta de la IA');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Luis', 'Fernández', 'luisfernandez@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 22, 'Creador de contenido');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Elena', 'Rodríguez', 'elenarodriguez@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 29, 'Diseñadora gráfica');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Pedro', 'Martínez', 'pedromartinez@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 35, 'Ingeniero de software');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Sara', 'Gómez', 'saragomez@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 26, 'Gestora de proyectos');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Jorge', 'González', 'jorgegonzalez@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 32, 'Consultor IT');
+INSERT INTO usuarios(nombre, apellido, email, contraseña, edad, descripcion) VALUES('Raquel', 'Sánchez', 'raquelsanchez@gmail.com', '$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S', 27, 'Desarrolladora móvil');
 
 INSERT INTO publicaciones(titulo, descripcion, categoria, fecha_publicacion, usuario_id) VALUES('Lanzamiento de nuevo producto', 'Anunciamos un nuevo producto al mercado.', 'Tecnología', CURRENT_TIMESTAMP, 1);
 INSERT INTO publicaciones(titulo, descripcion, categoria, fecha_publicacion, usuario_id) VALUES('Actualización de software', 'Nuestra última actualización trae nuevas características.', 'Software', CURRENT_TIMESTAMP, 2);

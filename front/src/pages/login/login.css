@@ -1,0 +1,126 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+}
+
+.login-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.logo-container {
+    width: 200px;
+    margin: 0 auto 2rem;
+    overflow: hidden;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.button-outline {
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.button-outline:hover {
+    background-color: #f3f4f6;
+}
+
+.button-primary {
+    background-color: #60a5fa;
+    color: #ffffff;
+    border: none;
+}
+
+.button-primary:hover {
+    background-color: #3b82f6;
+}
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.divider span {
+    padding: 0 0.5rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+}
+
+.text-right {
+    text-align: right;
+    margin-bottom: 1rem;
+}
+
+.link {
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-gray {
+    color: #6b7280;
+}
+

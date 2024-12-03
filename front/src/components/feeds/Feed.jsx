@@ -12,6 +12,9 @@ import { faListDots, faHeart, faComment, faShare } from '@fortawesome/free-solid
 import { useState } from 'react';
 
 import FeedImage3 from '../../assets/img/feed3.jpg'
+import { useUser } from '../../context/UserContext';
+
+import DefaultProfileImage from '../../assets/img/defaultProfilePicture.png';
 
 
 export default function Feed({fed}) {
@@ -22,33 +25,37 @@ export default function Feed({fed}) {
         setOpenComment(!openCommet)
     }
 
-    const date1 = new Date();
-    const date2 = new Date(fed.pubDate);
-    const differenceInMs = date1 - date2;
+    
 
-    const differenceInDays = differenceInMs / (1000 * 60 * 60 * 24);
-    const differenceInHours = differenceInMs / (1000 * 60 * 60);
-    const differenceInMinutes = differenceInMs / (1000 * 60);
-    // const differenceInSeconds = differenceInMs / 1000;
+    const getPostTime = () => {
+        const date1 = new Date();
+        const date2 = new Date(fed.pubDate);
+        const differenceInMs = date1 - date2;
 
-    let time = "";
+        const differenceInDays = differenceInMs / (1000 * 60 * 60 * 24);
+        const differenceInHours = differenceInMs / (1000 * 60 * 60);
+        const differenceInMinutes = differenceInMs / (1000 * 60);
+        // const differenceInSeconds = differenceInMs / 1000;
 
-    if (differenceInMs >= 1000 * 60) {
-        if(differenceInMs >= 1000 * 60 * 2) {
-            time = `Hace ${Math.floor(differenceInMinutes)} minutos`
+        let time = '';
+        if (differenceInMs >= 1000 * 60) {
+            if(differenceInMs >= 1000 * 60 * 2) {
+                time = `Hace ${Math.floor(differenceInMinutes)} minutos`
+            } else {
+                time = `Hace 1 minuto`;
+            }
         } else {
-            time = `Hace 1 minuto`;
+            time = `Hace menos de 1 minuto`;
         }
-    } else {
-        time = `Hace menos de 1 minuto`;
-    }
 
-    if (differenceInMs >= 1000 * 60 * 60) {
-        if(differenceInMs >= 1000 * 60 * 60 * 2) {
-            time = `Hace ${Math.floor(differenceInHours)} horas`;
-        } else {
-            time = `Hace 1 hora`;
+        if (differenceInMs >= 1000 * 60 * 60) {
+            if(differenceInMs >= 1000 * 60 * 60 * 2) {
+                time = `Hace ${Math.floor(differenceInHours)} horas`;
+            } else {
+                time = `Hace 1 hora`;
+            }
         }
+        return time
     }
 
     return (
@@ -56,10 +63,14 @@ export default function Feed({fed}) {
             <div className="top-content">
                 <Link to={`/profile/${fed.user.id}`}>
                     <div className="user">
-                        <img src={fed.feedProfile} alt="User" />
+                        { fed.user.hasImage == 'yes'?
+                            <img src={`https://res.cloudinary.com/dade42bjv/image/upload/f_auto,q_auto/profile${fed.user.id}-image`} alt="User" />
+                            :
+                            <img src={DefaultProfileImage}/>
+                        }
                         <div>
                             <h5>@{fed.user.name}</h5>
-                            <small>{time}</small>  
+                            <small>{getPostTime()}</small>  
                         </div>                              
                     </div>
                 </Link>
@@ -68,7 +79,11 @@ export default function Feed({fed}) {
             <div className="mid-content">
                 <p>{fed.title}</p>
                 <p>{fed.description}</p>
-                <img src={FeedImage3} alt="" />
+                { fed.hasImage == 'yes'?
+                    <img className="image-container" src={`https://res.cloudinary.com/dade42bjv/image/upload/q_auto,f_auto,w_800/feed${fed.id}.jpg`}/>
+                    :
+                    <></>
+                }
             </div>
             <div className="bottom-content">
                 <div className="action-item">

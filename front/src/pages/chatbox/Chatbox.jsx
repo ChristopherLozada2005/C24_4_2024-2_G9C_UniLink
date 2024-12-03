@@ -15,10 +15,16 @@ import { Stomp } from '@stomp/stompjs';
 import { useUser } from '../../context/UserContext';
 import { useParams } from 'react-router-dom';
 
+import UserService from '../../services/UserService';
+import DefaultProfileImage from '../../assets/img/defaultProfilePicture.png';
+
 
 export default function Chatbox(){
 
-    const { userId } = useUser();
+    const { userId, name, hasImage, username } = useUser().user;
+
+    const [userReceiver, setUserReceiver] = useState({});
+
     const { receiverId } = useParams();
 
     const [privateChats, setPrivateChats] = useState(new Map());
@@ -27,13 +33,40 @@ export default function Chatbox(){
     const stompClient = useRef(null);
     const socket = useRef(null);
 
+    const truncUsername = () => {
+        if (userReceiver != null && userReceiver.username != null) {
+            return `@${userReceiver.username.split('@')[0]}`;
+        }
+    }
+
+    const truncSenderName = (senderName) => {
+        if (senderName != null && senderName != null) {
+            return `@${senderName.split('@')[0]}`;
+        }
+    }
+
+    const getUserReceiver = () => {
+        console.log(receiverId);
+        UserService.getUserProfile(receiverId).then(response => {
+            console.log("Response ----> ", response.data);
+            setUserReceiver(response.data);
+        })
+    }
 
     useEffect(() => {
-        if (!userId) return;
+        getUserReceiver();
+    }, []);
+
+
+    useEffect(() => {
+        console.log(username);
+        console.log(userReceiver);
+        if (!username) return;
+        if (!userReceiver) return;
         socket.current = new SockJS("http://localhost:8080/ws");
         stompClient.current = Stomp.over(socket.current);
         stompClient.current.connect({}, () => {
-            stompClient.current.subscribe(`/user/${userId}/private`, function(payload) {
+            stompClient.current.subscribe(`/user/${username}/private`, function(payload) {
                 let payloadData = JSON.parse(payload.body);
                 console.log("Received >>> ", payloadData)
                 if (privateChats.get(payloadData.senderName)) {
@@ -48,34 +81,34 @@ export default function Chatbox(){
             })
             stompClient.current.send("/app/private-message", {}, JSON.stringify(
                 {
-                    senderName: userId,
+                    senderName: username,
                     receiverName: "",
                     message: "",
                     status: 'JOIN',
                 }
             ))
-            privateChats.set(receiverId, []);
+            privateChats.set(userReceiver.username, []);
             setPrivateChats(new Map(privateChats));
-        })
+        });
         return () => {
             if (stompClient.current) {
                 stompClient.current.disconnect();
             }
         };
-    }, [userId]);
+    }, [userReceiver]);
 
     const sendMessage = (e) => {
         console.log(privateChats);
         e.preventDefault();
         if (stompClient.current) {
             const chatMessage = {
-                senderName: userId,
-                receiverName: receiverId,
+                senderName: username,
+                receiverName: userReceiver.username,
                 message: message,
                 status: 'MESSAGE',
             }
-            if(userId !== receiverId) {
-                privateChats.get(receiverId).push(chatMessage);
+            if(username !== receiverId) {
+                privateChats.get(userReceiver.username).push(chatMessage);
                 setPrivateChats(new Map(privateChats));
             }
             stompClient.current.send("/app/private-message", {}, JSON.stringify(chatMessage));
@@ -89,23 +122,28 @@ export default function Chatbox(){
         const { value } = event.target;
         setMessage(value);
     }
+     
 
     return (
         <>
         <Stories />
         <div className="chat-box">
             <div className="chat-box-top">
-            <img src={CurrentUserData.map(user=>(user.ProfieImage))} alt='' />
+            { userReceiver.hasImage == 'yes'?
+                <img src={`https://res.cloudinary.com/dade42bjv/image/upload/f_auto,q_auto/profile${userReceiver.id}-image`} alt='' />
+                    :
+                <img src={DefaultProfileImage}/>
+            } 
                 <div className="user-name">
-                    <h3>{CurrentUserData.map(user=>(user.name))}</h3>
-                    <h5>{CurrentUserData.map(user=>(user.username))}</h5>
+                    <h3>{userReceiver.name}</h3>
+                    <h5>{truncUsername()}</h5>
                 </div>
             </div>
             {privateChats.size !== 0 &&
             <div className='chat-box-center'>
-                {[...privateChats.get(receiverId)].map((chat, index) => (
+                {[...privateChats.get(userReceiver.username)].map((chat, index) => (
                     <li key={index}>
-                        {chat.message}
+                        {truncSenderName(chat.senderName)}: {chat.message}
                     </li>
                 ))}   
             </div>

@@ -14,7 +14,7 @@ import { useUser } from '../../context/UserContext';
 
 export default function LeftBar(){
 
-    const { userId } = useUser();
+    const { userId } = useUser().user;
 
     return (
         <div className='leftBar'>
@@ -23,7 +23,7 @@ export default function LeftBar(){
                     <Link to={`/profile/${userId}`}>
                         <div className='items'>
                         <FontAwesomeIcon icon={faUser}/>
-                            <h4>Usuario</h4>
+                            <h4>Perfil</h4>
                         </div>
                     </Link>
 

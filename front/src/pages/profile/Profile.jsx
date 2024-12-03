@@ -14,7 +14,7 @@ export default function Profile(){
     const [feeds, setFeeds] = useState([]);
     const [user, setUser] = useState({});
     const { profileId } = useParams();
-    const { userId } = useUser();
+    const { userId } = useUser().user;
 
     const listFeeds = () => {
         PostService.getUserPosts(profileId).then(response => {
@@ -43,7 +43,7 @@ export default function Profile(){
     useEffect(() => {
         getUser();
         listFeeds();
-    }, [])
+    }, [profileId])
 
     return (
         <>

@@ -1,5 +1,5 @@
 import './addPost.css';
-
+import DefaultProfileImage from '../../assets/img/defaultProfilePicture.png';
 
 // Facke Api...........................
 import CurrentUserData from '../../FackApis/CurrentUserData'
@@ -12,15 +12,19 @@ import { useUser } from '../../context/UserContext';
 
 export default function AddPost({ onAddPost }){
 
-    const { userId } = useUser();
+    const { userId, hasImage } = useUser().user;
 
-    const [post, setPost] = useState({userId: userId, description: ""});
+    const [post, setPost] = useState({userId: userId, description: "", hasImage: 'no'});
+    const [file, setFile] = useState(null);
 
     const submitHandler = (e) => {
         e.preventDefault();
         console.log('Post',post);
+        if (file != null) {
+            setPost({...post, hasFile: 'yes'})
+        }
         onAddPost(post);
-        setPost({ userId: userId, description: "" });;
+        setPost({ userId: userId, description: "", hasImage: 'no' });
     }
 
     const onChange = (e) => {
@@ -29,20 +33,31 @@ export default function AddPost({ onAddPost }){
         console.log(post);
     }
 
+    const fileChangeHandler = (e) => {
+        const selectedFile = e.target.files[0];
+        console.log("Archivo seleccionado:", selectedFile);
+        setPost({...post, hasImage: 'yes'})
+        setFile('yes');
+    }
+
     useEffect(() => {
-        setPost({ userId: userId, description: "" });
+        setPost({ userId: userId, description: "", hasImage: 'no'});
     }, [userId]);
 
     return (
         <form className='postForm'>
             <div className="user form-top">
-                <img src={CurrentUserData.map(user=>(user.ProfieImage))} alt='' />
+                { hasImage == 'yes'?
+                    <img src={`https://res.cloudinary.com/dade42bjv/image/upload/f_auto,q_auto/profile${userId}-image`} alt='' />
+                        :
+                    <img src={DefaultProfileImage}/>
+                } 
                 <input onChange={onChange} value={post.description} type='text' placeholder='¿Qué estás pensando?' />
                 <button onClick={submitHandler} type="submit" className='btn btn-primary'>Publicar</button>
             </div>
             <div className="post-categories">
                 <label htmlFor="file">
-                    <input type="file" id='file' />
+                    <input onChange={fileChangeHandler} type="file" id='file' />
                     <span><FontAwesomeIcon icon={faImage} /> Fotos</span>
                 </label>
                 <label htmlFor="file">

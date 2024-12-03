@@ -12,9 +12,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faBell, faEnvelope, faHome, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from '../../context/UserContext';
 
+import DefaultProfileImage from '../../assets/img/defaultProfilePicture.png';
+
+
 export default function Nav(){
 
-    const { userId } = useUser();
+    const { userId, name, hasImage } = useUser().user;
 
     return (
         <nav>
@@ -50,8 +53,12 @@ export default function Nav(){
                         <FontAwesomeIcon icon={faBars} />
                     </Link>
                     <div className="user">
-                        <img src={CurrentUser.map(user=>(user.ProfieImage))} alt="user" />
-                        <h4>Usuario</h4>
+                        { hasImage == 'yes'?
+                            <img src={`https://res.cloudinary.com/dade42bjv/image/upload/f_auto,q_auto/profile${userId}-image`} alt="User" />
+                            :
+                            <img src={DefaultProfileImage}/>
+                        }
+                        <h4>{name}</h4>
                     </div>
                 </div>
             </div>

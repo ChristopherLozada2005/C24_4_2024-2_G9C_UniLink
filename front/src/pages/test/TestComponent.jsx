@@ -2,10 +2,10 @@ function test() {
 
   console.log("Hello");
 
-  <img src="https://res.cloudinary.com/tu_cloud_name/image/upload/w_300,h_300,c_fill/v12345678/sample.jpg" alt="Optimized" />
-
   return (
-    <></>
+    <>
+      <img className="image-container" src="https://res.cloudinary.com/dade42bjv/image/upload/q_auto,f_auto/v1733072245/feed3_ujhlv7.png" alt="Optimized" />
+    </>
   )
 }
 

@@ -5,32 +5,37 @@ import { jwtDecode } from 'jwt-decode';
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState({});
 
-  const getUserIdFromToken = () => {
+  const getUserFromToken = () => {
     const token = Cookies.get("authToken");
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
-        return decodedToken.userId;
+        const userData = {
+          userId: decodedToken.userId,
+          username: decodedToken.sub,
+          name: decodedToken.userName,
+          hasImage: decodedToken.hasImage,
+        }
+        return userData;
       } catch (error) {
         console.error("Error al decodificar el token:", error);
         return null;
       }
     }
     return null;
-
   };
 
   useEffect(() => {
-    const id = getUserIdFromToken();
+    const userData = getUserFromToken();
     console.log("Token decodificado:", Cookies.get("authToken"));
-    console.log("ID obtenido del token:", id);
-    setUserId(id);
+    console.log("Usuario obtenido del token: ", userData);
+    setUser(userData);
   }, []);
 
   return (
-    <UserContext.Provider value={{ userId, setUserId }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

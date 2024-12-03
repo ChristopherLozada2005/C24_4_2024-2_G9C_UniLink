@@ -20,7 +20,6 @@ export default function Message(){
                 <input type='search' placeholder='Search Message' />
             </div>
             <div className='border-div'></div>
-
             {
                 MessageData.map(mess=>(
                     <Link to='/chatbox/id'>

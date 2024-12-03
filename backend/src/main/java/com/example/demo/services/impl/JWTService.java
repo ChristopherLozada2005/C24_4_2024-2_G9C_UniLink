@@ -28,10 +28,13 @@ public class JWTService {
         key = Base64.getEncoder().encodeToString(sk.getEncoded());
     }
 
-    public String getToken(String username, Long userId){
+    public String getToken(String username, Long userId, String userName, String hasImage){
 
         Map<String, Object> claims = new HashMap<>();
+        System.out.println("----" + hasImage + "-----" + userName + ".----");
         claims.put("userId", userId);
+        claims.put("userName", userName);
+        claims.put("hasImage", hasImage);
 
         return Jwts.builder()
                 .claims()

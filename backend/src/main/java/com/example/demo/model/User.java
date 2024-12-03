@@ -40,8 +40,8 @@ public class User {
     @Column(name = "descripcion")
     private String description;
 
-    @Column(name = "imagen_perfil")
-    private String profilePicture;
+    @Column(name = "tiene_imagen")
+    private String hasImage;
 
     @Column(name = "fecha_registro")
     @CreationTimestamp

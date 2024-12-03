@@ -77,9 +77,9 @@ public class UserServiceImpl implements UserService {
                 user.getUsername(),
                 user.getPassword()
         ));
-        User userToGetId = userRepository.findByUsername(user.getUsername());
+        User userFromModel = userRepository.findByUsername(user.getUsername());
         if(authentication.isAuthenticated()){
-            return jwtService.getToken(user.getUsername(), userToGetId.getId());
+            return jwtService.getToken(user.getUsername(), userFromModel.getId(), userFromModel.getName(), userFromModel.getHasImage());
         }
         return "ERROR";
     }

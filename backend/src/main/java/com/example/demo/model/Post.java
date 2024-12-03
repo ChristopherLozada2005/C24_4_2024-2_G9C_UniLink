@@ -35,6 +35,9 @@ public class Post {
     @Column(name = "categoria")
     private String category;
 
+    @Column(name = "tiene_imagen")
+    private String hasImage;
+
     @Column(name = "fecha_publicacion")
     @CreationTimestamp
     // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -62,6 +65,7 @@ public class Post {
         pub.setTitle(postDTO.getTitle());
         pub.setCategory(postDTO.getCategory());
         pub.setDescription(postDTO.getDescription());
+        pub.setHasImage(postDTO.getHasImage());
         pub.setUser(user);
         return pub;
     }
@@ -72,11 +76,13 @@ public class Post {
         dto.setTitle(post.getTitle());
         dto.setDescription(post.getDescription());
         dto.setCategory(post.getCategory());
+        dto.setHasImage(post.getHasImage());
         dto.setPubDate(post.getPubDate());
 
         UserDTO userDTO = new UserDTO();
         userDTO.setId(post.getUser().getId());
         userDTO.setName(post.getUser().getName());
+        userDTO.setHasImage(post.getUser().getHasImage());
         dto.setUser(userDTO);
 
         return dto;

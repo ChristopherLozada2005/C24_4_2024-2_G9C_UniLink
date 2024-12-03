@@ -51,8 +51,9 @@ public class Comment {
         dto.setText(comment.getText());
 
         UserDTO user = new UserDTO();
+        user.setId(comment.getUser().getId());
         user.setName(comment.getUser().getName());
-        user.setProfilePicture(comment.getUser().getProfilePicture());
+        user.setHasImage(comment.getUser().getHasImage());
 
         dto.setUser(user);
         return dto;

@@ -15,6 +15,9 @@ class PostService {
   createPost(post) {
     return axiosInstance.post(POST_BASE_URL, post);
   }
+  deletePostById(postId) {
+    return axiosInstance.delete(`${POST_BASE_URL}/${postId}`);
+  }
 }
 
 export default new PostService();

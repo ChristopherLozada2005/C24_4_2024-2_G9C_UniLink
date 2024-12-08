@@ -39,7 +39,7 @@ public class PostController {
                 .toList();
     }
 
-    @GetMapping("/posts/{postCategory}")
+    @GetMapping("/posts/category/{postCategory}")
     public List<PostDTO> findPostsByCategory(@PathVariable String postCategory) {
         List<Post> posts = postService.findPostsByCategory(postCategory);
         return posts.stream()

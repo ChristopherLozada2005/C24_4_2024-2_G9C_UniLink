@@ -6,7 +6,7 @@ import Comments from '../comments/Comments';
 
 // Font Awesome Icon................................
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faListDots, faHeart, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faListDots, faHeart, faComment, faShare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 // States.........................
 import { useState } from 'react';
@@ -15,15 +15,23 @@ import FeedImage3 from '../../assets/img/feed3.jpg'
 import { useUser } from '../../context/UserContext';
 
 import DefaultProfileImage from '../../assets/img/defaultProfilePicture.png';
+import PostService from '../../services/PostService';
 
 
 export default function Feed({fed}) {
+
+    const { userId } = useUser().user;
 
     // States Discuse.........................
     let [openCommet, setOpenComment] = useState(false);
     const CommentHandeler =()=>{
         setOpenComment(!openCommet)
     }
+
+    const handleDelete = (postId) => {
+        PostService.deletePostById(postId);
+        console.log("Post Deleted");
+    } 
 
     
 
@@ -74,7 +82,14 @@ export default function Feed({fed}) {
                         </div>                              
                     </div>
                 </Link>
-                <span><FontAwesomeIcon icon={faListDots} /></span>
+                <span>
+                    {fed.user.id == userId &&
+                        <button onClick={() => handleDelete(fed.id)}>
+                            <FontAwesomeIcon icon={faTrashCan} />
+                        </button>
+                    }
+                    <FontAwesomeIcon icon={faListDots} />
+                </span>
             </div>
             <div className="mid-content">
                 <p>{fed.title}</p>

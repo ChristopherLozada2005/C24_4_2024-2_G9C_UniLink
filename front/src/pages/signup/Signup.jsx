@@ -1,29 +1,35 @@
 import React, { useState } from 'react';
+import LoginService from '../../services/LoginService';
 import './signup.css';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
-        nombre: '',
-        apellido: '',
-        edad: '',
-        genero: '',
-        correo: '',
-        contraseña: '',
+        name: '',
+        lastName: '',
+        age: '',
+        gender: '',
+        username: '',
+        password: '',
         aceptaTerminos: false
     });
 
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prevState => ({
-        ...prevState,
-        [name]: type === 'checkbox' ? checked : value
-        }));
+        const { name, value } = e.target;
+        console.log(name, value)
+        setFormData({...formData, [name]: value});
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        LoginService.register(formData)
         // Handle signup logic here
         console.log('Signup attempted with:', formData);
+        alert("Usuario Registrado: ", formData.username);
+        navigate("/login");
     };
 
     return (
@@ -50,34 +56,34 @@ const Signup = () => {
             <form onSubmit={handleSubmit}>
             <input
                 type="text"
-                name="nombre"
+                name="name"
                 placeholder="Nombre"
-                value={formData.nombre}
+                defaultValue={formData.name}
                 onChange={handleChange}
                 className="input"
                 required
             />
             <input
                 type="text"
-                name="apellido"
+                name="lastName"
                 placeholder="Apellido"
-                value={formData.apellido}
+                defaultValue={formData.lastName}
                 onChange={handleChange}
                 className="input"
                 required
             />
             <input
                 type="number"
-                name="edad"
+                name="age"
                 placeholder="Edad"
-                value={formData.edad}
+                defaultValue={formData.age}
                 onChange={handleChange}
                 className="input"
                 required
             />
             <select
-                name="genero"
-                value={formData.genero}
+                name="gender"
+                defaultValue={formData.gender}
                 onChange={handleChange}
                 className="input"
                 required
@@ -89,18 +95,18 @@ const Signup = () => {
             </select>
             <input
                 type="email"
-                name="correo"
+                name="username"
                 placeholder="Correo"
-                value={formData.correo}
+                defaultValue={formData.username}
                 onChange={handleChange}
                 className="input"
                 required
             />
             <input
                 type="password"
-                name="contraseña"
+                name="password"
                 placeholder="Contraseña"
-                value={formData.contraseña}
+                defaultValue={formData.password}
                 onChange={handleChange}
                 className="input"
                 required

@@ -1,16 +1,18 @@
 package com.example.demo.web;
 
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class UserController {
+
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     private final UserService userService;
 
@@ -22,6 +24,21 @@ public class UserController {
     @GetMapping("/users")
     public List<User> findAllUsers() {
         return userService.findAllUsers();
+    }
+
+    @PostMapping("/users")
+    public User createUser(@RequestBody User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        return userService.createUser(user);
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public void deleteUser(@PathVariable long userId) {
+        try {
+            userService.deleteUserById(userId);
+        } catch (UserNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/users/{userId}")

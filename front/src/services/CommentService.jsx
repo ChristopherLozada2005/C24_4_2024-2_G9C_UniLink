@@ -9,6 +9,9 @@ class CommentService {
   postComment(comment) {
     return axiosInstance.post(`${POST_BASE_URL}`, comment)
   }
+  deleteCommentById(commentId) {
+    return axiosInstance.delete(`${POST_BASE_URL}/${commentId}`);
+  }
 }
 
 export default new CommentService();

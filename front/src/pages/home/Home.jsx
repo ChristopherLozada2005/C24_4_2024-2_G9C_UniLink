@@ -28,6 +28,10 @@ export default function Home(){
         listFeeds();
     }, []);
 
+    useEffect(() => {
+        listFeeds();
+    }, [feeds]);
+
     return (
         <>
         <Stories />

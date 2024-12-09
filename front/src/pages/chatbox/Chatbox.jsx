@@ -139,15 +139,24 @@ export default function Chatbox(){
                     <h5>{truncUsername()}</h5>
                 </div>
             </div>
-            {privateChats.size !== 0 &&
-            <div className='chat-box-center'>
-                {[...privateChats.get(userReceiver.username)].map((chat, index) => (
-                    <li key={index}>
+            {privateChats.size !== 0 && (
+            <div className="chat-box-center">
+                {[...privateChats.get(userReceiver.username)].map((chat, index) => {
+                if (userReceiver.username !== chat.senderName) {
+                    return (
+                    <li key={index} className="bubble bubble-emisor">
                         {truncSenderName(chat.senderName)}: {chat.message}
                     </li>
-                ))}   
+                    );
+                }
+                return (
+                    <li key={index} className="bubble bubble-receptor">
+                        {truncSenderName(chat.senderName)}: {chat.message}
+                    </li>
+                );
+                })}
             </div>
-            }
+            )}
             <div className="chat-box-bottom">
                 <form action="#"> 
                     <input value={message} onChange={handleMessage} type="text" placeholder="Escribe tu mensaje..." />

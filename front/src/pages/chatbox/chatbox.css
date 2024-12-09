@@ -1,15 +1,19 @@
-.chat-box{
+/* Contenedor principal del chat */
+.chat-box {
     background: var(--color-card);
     min-height: 90vh;
     display: flex;
+    flex-direction: column; /* Alinea las burbujas desde abajo hacia arriba */
     align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
+    justify-content: flex-start;
     border-radius: .5rem;
-    overflow: hidden;
+    overflow-y: auto; /* Permite desplazarse si las burbujas exceden el tamaño */
     margin-bottom: 20px;
+    position: relative; /* Necesario para posicionar el formulario en la parte inferior */
 }
-.chat-box-top{
+
+/* Contenedor superior */
+.chat-box-top {
     width: 80%;
     margin: 0 auto;
     border-bottom: 1px solid var(--color-border);
@@ -19,35 +23,81 @@
     gap: .7rem;
     padding: 1rem 0;
 }
-.chat-box img{
+
+/* Estilo de la imagen de perfil */
+.chat-box img {
     width: 100px;
     border-radius: 50%;
     aspect-ratio: 1/1;
     margin-top: .5rem;
     border: 3px solid var(--color-primary);
 }
-.chat-box-bottom{
+
+/* Contenedor inferior */
+.chat-box-bottom {
     background: var(--color-bg);
     width: 80%;
-    margin: 1rem auto;
     padding: .8rem;
     border-radius: .5rem;
+    position: absolute; /* Esto posiciona el formulario en la parte inferior */
+    bottom: 0; /* Alinea al fondo del contenedor */
+    left: 50%;
+    transform: translateX(-50%); /* Centra el formulario horizontalmente */
+    margin-bottom: 30px;
 }
-.chat-box-bottom form{
+
+/* Estilo del formulario */
+.chat-box-bottom form {
     width: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-.chat-box-bottom input{
+
+/* Estilo del input */
+.chat-box-bottom input {
     width: 100%;
     background: transparent;
     color: var(--color-primary);
     font-size: 1rem;
 }
-.chat-box-bottom label input{
+
+/* Estilo para ocultar el input de tipo label */
+.chat-box-bottom label input {
     display: none;
 }
+
+/* Estilo común para las burbujas de chat */
+.bubble {
+    margin-block: 15px;
+    padding-inline: 10px;
+    padding-block: 10px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 100%;
+    word-wrap: break-word;
+    display: flex;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Estilo para la burbuja del emisor */
+.bubble-emisor {
+    background-color: #004288;
+    color: white;
+    align-self: flex-start; /* Alinea a la izquierda */
+    border-top-left-radius: 0px; /* Esquina superior izquierda recta */
+}
+
+/* Estilo para la burbuja del receptor */
+.bubble-receptor {
+    background-color: #d3d3d3;
+    color: #333;
+    align-self: flex-end; /* Alinea a la derecha */
+    border-top-right-radius: 0px; /* Esquina superior derecha recta */
+}
+
+
 
 /* ..................Start Media Scrin........ */
 @media (max-width:768px){

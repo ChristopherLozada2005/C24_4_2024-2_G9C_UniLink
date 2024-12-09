@@ -11,7 +11,7 @@ import { useUser } from '../../context/UserContext';
 
 import DefaultProfileImage from '../../assets/img/defaultProfilePicture.png';
 
-export default function Comments({ postId }){
+export default function Comments({ postId, getTime, stompClient }){
     const [comments, setComments] = useState([]);
 
     const listComments = () => {
@@ -22,6 +22,7 @@ export default function Comments({ postId }){
 
     useEffect(() => {
         console.log(postId);
+        console.log(comments)
         listComments();
     }, [])
 
@@ -40,6 +41,7 @@ export default function Comments({ postId }){
         CommentService.postComment(comment).then(response => {
             listComments();
         });
+        stompClient.send("/app/message", {}, JSON.stringify({ senderName: "name", message: "CONNECTED"}));
         setComment(defaultComment);
     }
 
@@ -60,7 +62,7 @@ export default function Comments({ postId }){
                             :
                             <img src={DefaultProfileImage}/>
                         } 
-                        <input onChange={onChange} value={comment.text} type='text' placeholder='Escribe tu comentario...' />
+                        <input onChange={onChange} value={comment.text} type='text' placeholder='Escribe tu comentario...' required/>
                         <button onClick={handleSubmit} className="btn btn-primary">Enviar</button>
                     </div>
                 </form>
@@ -74,11 +76,13 @@ export default function Comments({ postId }){
                                     :
                                 <img src={DefaultProfileImage}/>
                             } 
-                            <div>
-                                <h5>{comment.user.name}</h5>
-                                <p>{comment.text}</p>
+                            <div className='comm-content'>
+                                <div>
+                                    <h5>{comment.user.name}</h5>
+                                    <p>{comment.text}</p>
+                                </div>
+                                <small>{getTime(comment.commDate)}</small>
                             </div>
-                            <small>1h</small>
                         </div>
                     </Link>
                 ))

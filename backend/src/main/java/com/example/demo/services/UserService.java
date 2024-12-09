@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserService {
 
-    void validateCredentials(String username, String password) throws UserNotFoundException;
+    User validateCredentials(String username, String password) throws UserNotFoundException;
 
     List<User> findAllUsers();
     User findUserById(long id);

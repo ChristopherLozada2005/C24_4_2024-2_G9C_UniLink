@@ -4,6 +4,7 @@ import com.example.demo.dto.PostDTO;
 import com.example.demo.exception.PostNotFoundException;
 import com.example.demo.model.Post;
 import com.example.demo.model.User;
+import com.example.demo.repository.CommentRepository;
 import com.example.demo.services.PostService;
 import com.example.demo.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +18,12 @@ public class PostController {
 
     private final PostService postService;
     private final UserService userService;
+    private final CommentRepository commentRepository;
 
-    public PostController(PostService postService, UserService userService) {
+    public PostController(PostService postService, UserService userService, CommentRepository commentRepository) {
         this.postService = postService;
         this.userService = userService;
+        this.commentRepository = commentRepository;
     }
 
     @GetMapping("/posts")
@@ -35,7 +38,23 @@ public class PostController {
     public List<PostDTO> findPostsByUserId(@PathVariable long userId) {
         List<Post> posts = postService.findUserPosts(userId);
         return posts.stream()
-                .map(Post::toDto)
+                .map(post -> {
+                    int commentCount = commentRepository.countByPostId(post.getId());
+                    return new PostDTO(post.getId(), post.getTitle(), post.getDescription(), post.getCategory(), post.getHasImage(),
+                            post.getUser().getId(), post.getPubDate(), post.getUser().getName(), commentCount, null, post.getUser());
+                })
+                .toList();
+    }
+
+    @GetMapping("/posts/category/{userId}/{category}")
+    public List<PostDTO> findPostsByUserIdAndCategory(@PathVariable Long userId, @PathVariable String category) {
+        List<Post> posts = postService.findUserPostsByCategory(userId, category);
+        return posts.stream()
+                .map(post -> {
+                    int commentCount = commentRepository.countByPostId(post.getId());
+                    return new PostDTO(post.getId(), post.getTitle(), post.getDescription(), post.getCategory(), post.getHasImage(),
+                            post.getUser().getId(), post.getPubDate(), post.getUser().getName(), commentCount, null, post.getUser()) ;
+                })
                 .toList();
     }
 
@@ -43,7 +62,11 @@ public class PostController {
     public List<PostDTO> findPostsByCategory(@PathVariable String postCategory) {
         List<Post> posts = postService.findPostsByCategory(postCategory);
         return posts.stream()
-                .map(Post::toDto)
+                .map(post -> {
+                    int commentCount = commentRepository.countByPostId(post.getId());
+                    return new PostDTO(post.getId(), post.getTitle(), post.getDescription(), post.getCategory(), post.getHasImage(),
+                            post.getUser().getId(), post.getPubDate(), post.getUser().getName(), commentCount, null, post.getUser());
+                })
                 .toList();
     }
 

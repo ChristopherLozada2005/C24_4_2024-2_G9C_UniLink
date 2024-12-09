@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8081",
+  baseURL: "http://localhost:8080",
   timeout: 10000,
 });
 

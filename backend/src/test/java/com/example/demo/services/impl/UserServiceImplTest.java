@@ -56,14 +56,10 @@ class UserServiceImplTest {
     }
 
     @Test
-    void validateCredentials() {
-        final String USERNAME = "Juanperez@gmail.com";
-        final String PASSWORD = "password123";
-        try {
-            userService.validateCredentials(USERNAME, PASSWORD);
-        } catch (UserNotFoundException e) {
-            fail();
-        }
+    void validateCredentials() throws UserNotFoundException {
+        final String USERNAME = "magia@gmail.com";
+        final String PASSWORD = "$2a$12$ailEZo1fObkgatzOD.e1qe6/MlQ.7ZocF5Qn08VFRd2TrC5u.kL9S";
+        userService.validateCredentials(USERNAME, PASSWORD);
     }
 
     @Test

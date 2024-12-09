@@ -29,8 +29,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> findUserPostsByCategory(Long id, String category) {
+        return postRepository.findByUserIdAndCategoryOrderByPubDateDesc(id, category);
+    }
+
+    @Override
     public List<Post> findPostsByCategory(String category) {
-        return postRepository.findByCategory(category);
+        return postRepository.findByCategoryOrderByPubDateDesc(category);
     }
 
     @Override

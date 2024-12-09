@@ -20,3 +20,12 @@
     border-radius: .5rem;
     color: var(--color-text);
 }
+
+.comments .comm-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.comments .comm-content small {
+    margin-top: 7px;
+}

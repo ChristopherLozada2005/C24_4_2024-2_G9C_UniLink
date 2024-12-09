@@ -41,10 +41,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void validateCredentials(String username, String password) throws UserNotFoundException {
+    public User validateCredentials(String username, String password) throws UserNotFoundException {
         User user = userRepository.findByUsernameAndPassword(username, password);
         if (user != null) {
-            return;
+            return user;
         }
         throw new UserNotFoundException("Invalid Credentials");
     }

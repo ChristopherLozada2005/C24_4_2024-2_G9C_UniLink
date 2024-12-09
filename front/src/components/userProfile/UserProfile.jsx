@@ -9,16 +9,67 @@ import DefaultProfileImage from '../../assets/img/defaultProfilePicture.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFeed, faLink, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { useUser } from '../../context/UserContext';
+import { useEffect, useRef, useState } from 'react';
 
-export default function UserProfile({ user }){
+import FriendshipService from '../../services/FriendshipService';
+import SockJS from 'sockjs-client';
+import { Stomp } from '@stomp/stompjs';
 
-    const { userId, hasImage }  = useUser().user;
+export default function UserProfile({ user, profileId, stompClientProfile, friendStatus, setFriendStatus, fetchFriendStatus }){
+
+    const { userId }  = useUser().user;
+    
+
+    const deleteHandler = async (friendId) => {
+        try {
+            const response = await FriendshipService.deleteFriendship(friendId);
+            stompClientProfile.send("/app/message", {}, JSON.stringify({ senderName: "name", message: "CHANGE (PROFILE): FRIEND STATUS"}));
+            fetchFriendStatus();
+            console.log('FriendRequest deleted: ', response.data);
+        } catch (error) {
+            console.error('Error deleting friend request:', error);
+        }
+    };
+
+    const handleFriendRequest = async (userId, profileId) => {
+        try {
+            const body = {
+                firstUserId: userId,
+                secondUserId: profileId,
+            }
+            const response = await FriendshipService.createFriendship(body);
+            setFriendStatus(response.data);
+            stompClientProfile.send("/app/message", {}, JSON.stringify({ senderName: "name", message: "CHANGE (PROFILE): FRIEND STATUS"}));
+            fetchFriendStatus();
+        } catch (error) {
+            console.error('Error deleting friend request:', error);
+        }
+    }
+
+    const acceptHandler = async (friendshipId) => {
+        try {
+            const response = await FriendshipService.updateFriendshipStatus(friendshipId);
+            console.log('FriendRequest updated: ', response.data);
+            stompClientProfile.send("/app/message", {}, JSON.stringify({ senderName: "name", message: "CHANGE (PROFILE): FRIEND STATUS"}));
+            fetchFriendStatus();
+        } catch (error) {
+            console.error('Error updating friend request:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchFriendStatus();
+    }, [userId]);
 
     const truncUsername = () => {
         if (user != null && user.username != null) {
             return `@${user.username.split('@')[0]}`;
         }
     }
+
+
+
+
     return (
         <div className='userProfile'>
             <div className="cover-photos">
@@ -42,12 +93,33 @@ export default function UserProfile({ user }){
                             <FontAwesomeIcon icon={faMessage} />
                         </button>
                         </Link>
-                        <button className='btn btn-primary'>
-                            <FontAwesomeIcon icon={faFeed} /> sígueme
-                        </button>
+
+
+                        { friendStatus.status == 'ACCEPTED' &&
+                            <button onClick={() => {deleteHandler(friendStatus.id)}} className='btn btn-primary'>
+                                Eliminar
+                            </button>
+                        }
+                        { friendStatus.status == 'RECEIVED' &&
+                            <button onClick={() => {acceptHandler(friendStatus.id)}} className='btn btn-primary'>
+                                <FontAwesomeIcon icon={faFeed} /> Aceptar Solicitud
+                            </button>
+                        }
+                        { friendStatus.status == 'PENDING' &&
+                            <button className='btn btn-primary'>
+                                Solicitud Enviada
+                            </button>
+                        }
+                        { friendStatus == "" &&
+                            <button onClick={() => {handleFriendRequest(userId, profileId)}} className='btn btn-primary'>
+                                <FontAwesomeIcon icon={faFeed} /> Enviar Solicitud
+                            </button>
+                        }
+                        
                         <button className='btn'>
                             <FontAwesomeIcon icon={faLink} />
                         </button>
+
                     </>
                     }
                 </div>

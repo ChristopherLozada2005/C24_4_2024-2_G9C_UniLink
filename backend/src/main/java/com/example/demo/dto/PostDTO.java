@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,8 @@ public class PostDTO {
     private Long userId;
     private LocalDateTime pubDate;
     private String userName;
+    private int commentCount;
     private UserDTO user;
+    private User usersito;
 
 }

@@ -6,7 +6,7 @@ import Comments from '../comments/Comments';
 
 // Font Awesome Icon................................
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faListDots, faHeart, faComment, faShare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faListDots, faHeart, faComment, faShare, faTrashCan, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 // States.........................
 import { useState } from 'react';
@@ -15,29 +15,21 @@ import FeedImage3 from '../../assets/img/feed3.jpg'
 import { useUser } from '../../context/UserContext';
 
 import DefaultProfileImage from '../../assets/img/defaultProfilePicture.png';
-import PostService from '../../services/PostService';
 
 
-export default function Feed({fed}) {
+export default function Feed({fed, handleFeedDelete, stompClient}) {
 
-    const { userId } = useUser().user;
+    const {userId} = useUser().user;
 
-    // States Discuse.........................
     let [openCommet, setOpenComment] = useState(false);
+
     const CommentHandeler =()=>{
         setOpenComment(!openCommet)
     }
-
-    const handleDelete = (postId) => {
-        PostService.deletePostById(postId);
-        console.log("Post Deleted");
-    } 
-
     
-
-    const getPostTime = () => {
+    const getTime = (pubDate) => {
         const date1 = new Date();
-        const date2 = new Date(fed.pubDate);
+        const date2 = new Date(pubDate);
         const differenceInMs = date1 - date2;
 
         const differenceInDays = differenceInMs / (1000 * 60 * 60 * 24);
@@ -69,27 +61,27 @@ export default function Feed({fed}) {
     return (
         <div className='feed' key={fed.userid}>
             <div className="top-content">
-                <Link to={`/profile/${fed.user.id}`}>
+                <Link to={`/profile/${fed.usersito.id}`}>
                     <div className="user">
-                        { fed.user.hasImage == 'yes'?
-                            <img src={`https://res.cloudinary.com/dade42bjv/image/upload/f_auto,q_auto/profile${fed.user.id}-image`} alt="User" />
+                        { fed.usersito.hasImage == 'yes'?
+                            <img src={`https://res.cloudinary.com/dade42bjv/image/upload/f_auto,q_auto/profile${fed.usersito.id}-image`} alt="User" />
                             :
                             <img src={DefaultProfileImage}/>
                         }
                         <div>
-                            <h5>@{fed.user.name}</h5>
-                            <small>{getPostTime()}</small>  
+                            <h5>@{fed.usersito.name}</h5>
+                            <small>{getTime(fed.pubDate)}</small>  
                         </div>                              
                     </div>
                 </Link>
-                <span>
-                    {fed.user.id == userId &&
-                        <button onClick={() => handleDelete(fed.id)}>
-                            <FontAwesomeIcon icon={faTrashCan} />
-                        </button>
+                <div className='right-buttons'>
+                    {fed.usersito.id == userId &&
+                    <>
+                        <FontAwesomeIcon className='trash-icon' onClick={() => {handleFeedDelete(fed.id)}} icon={faTrashCan} />
+                    </>
                     }
                     <FontAwesomeIcon icon={faListDots} />
-                </span>
+                </div>
             </div>
             <div className="mid-content">
                 <p>{fed.title}</p>
@@ -102,16 +94,24 @@ export default function Feed({fed}) {
             </div>
             <div className="bottom-content">
                 <div className="action-item">
-                    <span><FontAwesomeIcon icon={faHeart} /> 14 Me gusta</span>
+                    <span><FontAwesomeIcon color='red' icon={faHeart} /> Me gusta</span>
                 </div>
                 <div className="action-item" onClick={CommentHandeler}>
-                    <span><FontAwesomeIcon icon={faComment} /> 2 Comentarios</span>
+                    { fed.commentCount == 0 &&
+                        <span><FontAwesomeIcon icon={faComment} /> Comentarios</span>
+                    }
+                    { fed.commentCount == 1 &&
+                        <span><FontAwesomeIcon icon={faComment} /> {fed.commentCount} Comentario</span>
+                    }
+                    { fed.commentCount > 1 &&
+                        <span><FontAwesomeIcon icon={faComment} /> {fed.commentCount} Comentarios</span>
+                    }
                 </div>
                 <div className="action-item">
-                    <span><FontAwesomeIcon icon={faShare} /> 1 compartido</span>
+                    <span><FontAwesomeIcon icon={faShare} /> compartir</span>
                 </div>
             </div>
-            {openCommet && <Comments postId={fed.id}/>}
+            {openCommet && <Comments postId={fed.id} getTime={getTime} stompClient={stompClient}/>}
         </div>
     );
 }

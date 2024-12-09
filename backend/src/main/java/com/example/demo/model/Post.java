@@ -48,7 +48,7 @@ public class Post {
     @JsonBackReference("user-publications")
     private User user;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("publication-comments")
     private List<Comment> comments;
 
@@ -72,6 +72,27 @@ public class Post {
 
     public static PostDTO toDto(Post post) {
         PostDTO dto = new PostDTO();
+        dto.setId(post.getId());
+        dto.setTitle(post.getTitle());
+        dto.setDescription(post.getDescription());
+        dto.setCategory(post.getCategory());
+        dto.setHasImage(post.getHasImage());
+        dto.setPubDate(post.getPubDate());
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(post.getUser().getId());
+        userDTO.setName(post.getUser().getName());
+        userDTO.setHasImage(post.getUser().getHasImage());
+        dto.setUser(userDTO);
+
+        return dto;
+    }
+
+    public PostDTO toDtoNonStatic(Post post) {
+        int commentCount = (comments != null) ? comments.size() : 0;
+
+        PostDTO dto = new PostDTO();
+        dto.setCommentCount(commentCount);
         dto.setId(post.getId());
         dto.setTitle(post.getTitle());
         dto.setDescription(post.getDescription());

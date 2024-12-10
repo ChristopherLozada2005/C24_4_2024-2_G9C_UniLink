@@ -11,7 +11,6 @@ import { faListDots, faHeart, faComment, faShare, faTrashCan, faTrash } from '@f
 // States.........................
 import { useState } from 'react';
 
-import FeedImage3 from '../../assets/img/feed3.jpg'
 import { useUser } from '../../context/UserContext';
 
 import DefaultProfileImage from '../../assets/img/defaultProfilePicture.png';
@@ -77,7 +76,7 @@ export default function Feed({fed, handleFeedDelete, stompClient}) {
                 <div className='right-buttons'>
                     {fed.usersito.id == userId &&
                     <>
-                        <FontAwesomeIcon className='trash-icon' onClick={() => {handleFeedDelete(fed.id)}} icon={faTrashCan} />
+                        <FontAwesomeIcon className='trash-icon' onClick={() => {handleFeedDelete(fed.id, fed.imageUrl)}} icon={faTrashCan} />
                     </>
                     }
                     <FontAwesomeIcon icon={faListDots} />
@@ -87,7 +86,7 @@ export default function Feed({fed, handleFeedDelete, stompClient}) {
                 <p>{fed.title}</p>
                 <p>{fed.description}</p>
                 { fed.hasImage == 'yes'?
-                    <img className="image-container" src={`https://res.cloudinary.com/dade42bjv/image/upload/q_auto,f_auto,w_800/feed${fed.id}.jpg`}/>
+                    <img className="image-container" src={fed.imageUrl}/>
                     :
                     <></>
                 }

@@ -8,8 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 // Icon Image.............
-import Firend from "../../assets/icon/1.png"
-import Message from "../../assets/icon/7.png"
+import Message from "../../assets/icon/message.png"
 import { useUser } from '../../context/UserContext';
 
 export default function LeftBar(){

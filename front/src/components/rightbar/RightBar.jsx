@@ -48,7 +48,7 @@ export default function RightBar(){
     }, [userId]);
 
     useEffect(() => {
-        socketRightBar.current = new SockJS("http://localhost:8080/ws3");
+        socketRightBar.current = new SockJS(`${import.meta.env.VITE_API_URL}/ws3`);
         stompClientRightBar.current = Stomp.over(socketRightBar.current);
         stompClientRightBar.current.connect({}, () => {
             stompClientRightBar.current.subscribe('/chatroom/public', () => {

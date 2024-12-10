@@ -1,33 +1,4 @@
 
-import feedProfile1 from '../assets/img/FeedProfile1.jpg';
-import feedProfile2 from '../assets/img/FeedProfile2.jpg';
-import feedProfile3 from '../assets/img/FeedProfile3.jpg';
-import feedProfile4 from '../assets/img/FeedProfile4.webp';
-import feedProfile5 from '../assets/img/FeedProfile5.jpg';
-import feedProfile6 from '../assets/img/FeedProfile6.webp';
-import feedProfile7 from '../assets/img/FeedProfile7.jpg';
-import feedProfile8 from '../assets/img/FeedProfile8.jpeg';
-import feedProfile9 from '../assets/img/FeedProfile9.jpg';
-import feedProfile10 from '../assets/img/FeedProfile10.jpg';
-import feedProfile11 from '../assets/img/FeedProfile11.jpg';
-import feedProfile12 from '../assets/img/FeedProfile12.jpg';
-import feedProfile13 from '../assets/img/FeedProfile13.jpg';
-
-
-import FeedImage1 from '../assets/img/feed1.jpg'
-import FeedImage2 from '../assets/img/feed2.jpg'
-import FeedImage3 from '../assets/img/feed3.jpg'
-import FeedImage4 from '../assets/img/feed4.jpg'
-import FeedImage5 from '../assets/img/feed5.jpg'
-import FeedImage6 from '../assets/img/feed6.jpg'
-import FeedImage7 from '../assets/img/feed7.jpg'
-import FeedImage8 from '../assets/img/feed8.jpg'
-import FeedImage9 from '../assets/img/feed9.png'
-import FeedImage10 from '../assets/img/feed10.jpg'
-import FeedImage11 from '../assets/img/feed11.jpg'
-import FeedImage12 from '../assets/img/feed12.jpg'
-import FeedImage13 from '../assets/img/feed13.jpg'
-
 const Feeds =[
     {
         id: 1,

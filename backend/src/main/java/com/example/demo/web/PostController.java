@@ -41,6 +41,7 @@ public class PostController {
                 .map(post -> {
                     int commentCount = commentRepository.countByPostId(post.getId());
                     return new PostDTO(post.getId(), post.getTitle(), post.getDescription(), post.getCategory(), post.getHasImage(),
+                            post.getImageUrl(),
                             post.getUser().getId(), post.getPubDate(), post.getUser().getName(), commentCount, null, post.getUser());
                 })
                 .toList();
@@ -53,6 +54,7 @@ public class PostController {
                 .map(post -> {
                     int commentCount = commentRepository.countByPostId(post.getId());
                     return new PostDTO(post.getId(), post.getTitle(), post.getDescription(), post.getCategory(), post.getHasImage(),
+                            post.getImageUrl(),
                             post.getUser().getId(), post.getPubDate(), post.getUser().getName(), commentCount, null, post.getUser()) ;
                 })
                 .toList();
@@ -65,6 +67,7 @@ public class PostController {
                 .map(post -> {
                     int commentCount = commentRepository.countByPostId(post.getId());
                     return new PostDTO(post.getId(), post.getTitle(), post.getDescription(), post.getCategory(), post.getHasImage(),
+                            post.getImageUrl(),
                             post.getUser().getId(), post.getPubDate(), post.getUser().getName(), commentCount, null, post.getUser());
                 })
                 .toList();

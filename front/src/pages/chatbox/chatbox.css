@@ -1,5 +1,6 @@
 /* Contenedor principal del chat */
 .chat-box {
+    margin-top: 20px;
     background: var(--color-card);
     min-height: 90vh;
     display: flex;

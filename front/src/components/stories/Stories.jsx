@@ -4,9 +4,6 @@ import './stories.css';
 import { Swiper, SwiperSlide } from 'swiper/react'; // Correcto
 import 'swiper/css'
 
-// Facke Apis.................
-import StoriesData from '../../FackApis/StoriesData'
-
 // Components.................
 import UserStory from './UserStory'
 

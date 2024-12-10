@@ -34,7 +34,12 @@ export default function Home(){
         });
     };
 
-    const addNewPost = (newPost) => {
+    const addNewPost = (newPost, imgUrl) => {
+        if (newPost.hasImage == 'yes') {
+            console.log("--------");
+            newPost = {...newPost, imageUrl: imgUrl}
+        } 
+        console.log(newPost)
         PostService.createPost(newPost).then(() => {
             if (newPost.status == "Curricular") {
                 setIsChecked(true);
@@ -55,7 +60,7 @@ export default function Home(){
     }, []);
 
     useEffect(() => {
-        socket1.current = new SockJS("http://localhost:8080/ws2");
+        socket1.current = new SockJS(`${import.meta.env.VITE_API_URL}/ws2`);
         stompClient1.current = Stomp.over(socket1.current);
         stompClient1.current.connect({}, () => {
         stompClient1.current.subscribe('/chatroom/public', () => {
@@ -73,6 +78,7 @@ export default function Home(){
         <Stories />
         */}
         <AddPost
+            profileId={null}
             onAddPost={addNewPost}
             isChecked={isChecked}
             setIsChecked={setIsChecked}

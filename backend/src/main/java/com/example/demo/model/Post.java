@@ -38,6 +38,9 @@ public class Post {
     @Column(name = "tiene_imagen")
     private String hasImage;
 
+    @Column(name = "imagen_url")
+    private String imageUrl;
+
     @Column(name = "fecha_publicacion")
     @CreationTimestamp
     // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -63,6 +66,7 @@ public class Post {
     public static Post fromDto(PostDTO postDTO, User user) {
         Post pub = new Post();
         pub.setTitle(postDTO.getTitle());
+        pub.setImageUrl(postDTO.getImageUrl());
         pub.setCategory(postDTO.getCategory());
         pub.setDescription(postDTO.getDescription());
         pub.setHasImage(postDTO.getHasImage());

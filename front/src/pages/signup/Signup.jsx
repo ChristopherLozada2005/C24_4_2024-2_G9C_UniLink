@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Logo from '../../assets/icon/logo.png';
 import LoginService from '../../services/LoginService';
 import './signup.css';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +37,7 @@ const Signup = () => {
         <div className="login-container">
         <div className="login-card">
             <div className="logo-wrapper">
-            <img src="src\assets\icon\logoo.png" alt="UniLink Logo" className="logo" />
+            <img src={Logo} alt="UniLink Logo" className="logo" />
             </div>
             <button className="button button-outline">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="22" height="22" viewBox="0 0 48 48">

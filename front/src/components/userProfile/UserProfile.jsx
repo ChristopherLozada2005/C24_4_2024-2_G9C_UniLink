@@ -19,7 +19,6 @@ export default function UserProfile({ user, profileId, stompClientProfile, frien
 
     const { userId }  = useUser().user;
     
-
     const deleteHandler = async (friendId) => {
         try {
             const response = await FriendshipService.deleteFriendship(friendId);
@@ -66,9 +65,6 @@ export default function UserProfile({ user, profileId, stompClientProfile, frien
             return `@${user.username.split('@')[0]}`;
         }
     }
-
-
-
 
     return (
         <div className='userProfile'>

@@ -58,7 +58,7 @@ export default function Profile(){
     const socketProfile = useRef(null);
 
     useEffect(() => {
-        socketProfile.current = new SockJS("http://localhost:8080/ws4");
+        socketProfile.current = new SockJS(`${import.meta.env.VITE_API_URL}/ws4`);
         stompClientProfile.current = Stomp.over(socketProfile.current);
         stompClientProfile.current.connect({}, () => {
             stompClientProfile.current.subscribe('/chatroom/public', () => {
@@ -96,6 +96,7 @@ export default function Profile(){
 
         {profileId == userId &&
             <AddPost
+                profileId={profileId}
                 onAddPost={addNewPost}
                 isChecked={isChecked}
                 setIsChecked={setIsChecked}

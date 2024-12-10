@@ -63,7 +63,7 @@ export default function Chatbox(){
         console.log(userReceiver);
         if (!username) return;
         if (!userReceiver) return;
-        socket.current = new SockJS("http://localhost:8080/ws");
+        socket.current = new SockJS(`${import.meta.env.VITE_API_URL}/ws`);
         stompClient.current = Stomp.over(socket.current);
         stompClient.current.connect({}, () => {
             stompClient.current.subscribe(`/user/${username}/private`, function(payload) {
@@ -126,7 +126,6 @@ export default function Chatbox(){
 
     return (
         <>
-        <Stories />
         <div className="chat-box">
             <div className="chat-box-top">
             { userReceiver.hasImage == 'yes'?

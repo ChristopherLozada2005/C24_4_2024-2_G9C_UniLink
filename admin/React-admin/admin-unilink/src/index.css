@@ -1,0 +1,208 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.usuario-data-box .info{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px
+}
+
+.user-profile-image {
+  width: 150px;            /* Tamaño fijo de la imagen */
+  height: 150px;           /* Tamaño fijo de la imagen */
+  border-radius: 50%;      /* Hace que la imagen sea circular */
+  object-fit: cover;       /* Asegura que la imagen se ajuste sin distorsión */
+  border: 2px solid #ccc; /* Borde gris para la imagen */
+}
+
+.publicaciones-box {
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil y transparente */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: rgba(100, 100, 100, 0.1); /* Fondo ligeramente translúcido */
+  padding: 20px; /* Espaciado interno */
+  margin: 10px; /* Margen externo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para un efecto de profundidad */
+  transition: all 0.3s ease; /* Transición suave para interacciones */
+}
+
+.publicaciones-box th {
+  padding: 10px;
+  background-color: #252525;
+}
+.publicaciones-box td {
+  text-align: center;
+  background-color: #333435;
+  padding: 10px;
+}
+
+
+/* ----------- */
+
+.usuarios-box {
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil y transparente */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: rgba(100, 100, 100, 0.1); /* Fondo ligeramente translúcido */
+  padding: 20px; /* Espaciado interno */
+  margin: 10px; /* Margen externo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para un efecto de profundidad */
+  transition: all 0.3s ease; /* Transición suave para interacciones */
+}
+
+.usuarios-box .table{
+  margin-top: 10px;
+}
+
+.usuarios-box th {
+  padding: 10px;
+  background-color: #252525;
+}
+.usuarios-box td {
+  text-align: center;
+  background-color: #333435;
+  padding: 10px;
+}
+
+.usuarios-box .table .button-1{
+  margin-right: 5px;
+}
+
+
+.usuarios-form {
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil y transparente */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: rgba(100, 100, 100, 0.1); /* Fondo ligeramente translúcido */
+  padding: 20px; /* Espaciado interno */
+  margin: 10px; /* Margen externo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para un efecto de profundidad */
+  transition: all 0.3s ease; /* Transición suave para interacciones */
+}
+
+.usuarios-form .input {
+  margin-bottom: 15px; /* Espaciado inferior entre los campos */
+}
+
+.usuarios-form .input label {
+  font-size: 16px; /* Tamaño de la etiqueta */
+  color: rgba(255, 255, 255, 0.8); /* Color de la etiqueta */
+  display: block; /* Asegura que la etiqueta esté en su propia línea */
+  margin-bottom: 8px; /* Espaciado entre la etiqueta y el input */
+}
+
+.usuarios-form .input input {
+  width: 93%; /* Campo de entrada ocupa todo el ancho */
+  padding: 10px; /* Relleno dentro del campo de entrada */
+  background-color: rgba(70, 70, 70, 0.2); /* Fondo de campo de entrada */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
+  border-radius: 5px; /* Bordes redondeados */
+  color: rgba(255, 255, 255, 0.8); /* Texto claro dentro del campo */
+  font-size: 16px; /* Tamaño del texto dentro del campo */
+  outline: none; /* Elimina el borde de enfoque predeterminado */
+  transition: all 0.3s ease; /* Transición suave para interacciones */
+}
+
+.usuarios-form .button-1 {
+  margin-right: 10px;
+}
+
+
+/*
+.publicaciones-box .btn{
+  background-color: #1b1b1b;
+  text-align: center;
+  padding: 10px;
+}
+*/
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+.body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  min-width: 320px;
+  min-height: 30vh;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar .top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar .top img {
+  margin-left: 40px;
+  width: 200px;            /* Tamaño fijo de la imagen */
+  height: 200px;           /* Tamaño fijo de la imagen */
+}
+
+.navbar .buttons {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1px;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

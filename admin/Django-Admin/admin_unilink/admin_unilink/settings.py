@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8+@%a@p$lh%*d-_eb+@3zdxcq2aqxl&#rvnv#=lhh26g)#(rb!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,6 +55,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4000",  # React dev server
+    "http://ec2-3-140-207-211.us-east-2.compute.amazonaws.com",  # React dev server
 ]
 
 ROOT_URLCONF = 'admin_unilink.urls'
@@ -86,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'unilink',
         'USER': 'root',
-        'PASSWORD': 'gdchocoplz',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }

@@ -8,6 +8,18 @@
 from django.db import models
 
 
+class Amistad(models.Model):
+    fecha_amistad = models.DateTimeField(blank=True, null=True)
+    id = models.BigAutoField(primary_key=True)
+    primer_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='primer_usuario', blank=True, null=True)
+    segundo_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='segundo_usuario', related_name='amistad_segundo_usuario_set', blank=True, null=True)
+    estado = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'amistad'
+
+
 class Comentarios(models.Model):
     comentario_id_parent = models.ForeignKey('self', models.DO_NOTHING, db_column='comentario_id_parent', blank=True, null=True)
     fecha_comentario = models.DateTimeField(blank=True, null=True)
@@ -22,7 +34,7 @@ class Comentarios(models.Model):
 
 
 class Message(models.Model):
-    status = models.IntegerField(blank=True, null=True)
+    status = models.JSONField(blank=True, null=True)
     id = models.BigAutoField(primary_key=True)
     date = models.CharField(max_length=255, blank=True, null=True)
     message = models.CharField(max_length=255, blank=True, null=True)
@@ -40,6 +52,7 @@ class Publicaciones(models.Model):
     usuario = models.ForeignKey('Usuarios', models.DO_NOTHING)
     categoria = models.CharField(max_length=255, blank=True, null=True)
     descripcion = models.CharField(max_length=255, blank=True, null=True)
+    imagen_url = models.CharField(max_length=255, blank=True, null=True)
     tiene_imagen = models.CharField(max_length=255, blank=True, null=True)
     titulo = models.CharField(max_length=255, blank=True, null=True)
 

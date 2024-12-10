@@ -67,7 +67,7 @@ const ComentariosList = () => {
                             </td>
                             <td>{comentario.publicacion}</td>
                             <td>
-                                <button onClick={() => handleDelete(publicacion.id)}>Eliminar</button>
+                                <button onClick={() => handleDelete(comentario.id)}>Eliminar</button>
                             </td>
                         </tr>
                     ))}

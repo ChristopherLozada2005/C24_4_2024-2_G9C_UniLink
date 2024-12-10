@@ -27,14 +27,14 @@ const EditarUsuario = () => {
         try {
             await updateUsuario(id, { nombre, email, contraseña });
             alert("Usuario actualizado con éxito.");
-            navigate("/");
+            navigate("/usuarios");
         } catch (error) {
             console.error("Error updating usuario:", error);
         }
     };
 
     const handleBack = () => {
-        navigate("/");
+        navigate("/usuarios");
     };
 
     return (

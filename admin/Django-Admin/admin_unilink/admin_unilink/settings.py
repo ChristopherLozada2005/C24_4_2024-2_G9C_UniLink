@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'unilink',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'gdchocoplz',
         'HOST': 'localhost',
         'PORT': '3306',
     }

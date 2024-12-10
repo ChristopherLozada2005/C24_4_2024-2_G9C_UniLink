@@ -25,7 +25,7 @@ const UsuarioForm = () => {
     };
 
     const handleBack = () => {
-        navigate("/");
+        navigate("/usuarios");
     };
 
     return (
